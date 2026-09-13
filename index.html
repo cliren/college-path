@@ -107,15 +107,6 @@ button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible
 }
 a { color: var(--accent); }
 
-.parent-bar {
-  display: none;
-  background: var(--accent);
-  color: #fff;
-  padding: 8px 16px;
-  font-size: var(--text-sm);
-  text-align: center;
-}
-.parent-bar.on { display: block; }
 
 .topbar {
   position: sticky;
@@ -629,8 +620,6 @@ a { color: var(--accent); }
 </style>
 </head>
 <body>
-<div class="parent-bar" id="parentBar" role="status">Parent mode on — same facts, slightly fuller notes. Type <b>student</b> to switch back.</div>
-
 <header class="topbar">
   <div class="topbar-inner">
     <a class="brand" href="index.html">CA College Path</a>
@@ -761,10 +750,10 @@ a { color: var(--accent); }
     <a href="assumptions.html">Assumptions</a>
     <a href="news.html">News</a>
     <a href="international.html">International</a>
+    <a href="parents.html">Parents</a>
   </nav>
   <div>Planning tool · data retrieved 2026-09-12 · not official admissions advice<br>
   Always confirm deadlines and major rules on campus sites.</div>
-  <p class="kbd-hint">Tip: type <b>parent</b> for parent notes · <b>student</b> to switch back.</p>
 </footer>
 
 <div class="sheet-backdrop" id="sheetBackdrop"></div>
@@ -1253,9 +1242,7 @@ const state = {
   start: DB.levers.start,
   region: DB.levers.region,
   need_likely_seat: DB.levers.need_likely_seat,
-  geo_scope: DB.levers.geo_scope || "california",
-  parent: false,
-  typed: ""
+  geo_scope: DB.levers.geo_scope || "california"
 };
 
 const TIPS = {
@@ -1532,8 +1519,7 @@ function renderJourney() {
   const courses = (path.course_map || []).map(c =>
     `<div style="margin:4px 0"><span class="pill">${escapeHtml(c.year)}</span> ${(c.items || [c.note || ""]).map(escapeHtml).join(" · ")}</div>`
   ).join("");
-  fb.innerHTML = (state.parent ? "<p><em>Parent note: keep one backup path that does not require a perfect GPA year.</em></p>" : "") +
-    "<div class='pill-row'><span class='pill'>Path: " + escapeHtml(path.label) + "</span></div>" +
+  fb.innerHTML = "<div class='pill-row'><span class='pill'>Path: " + escapeHtml(path.label) + "</span></div>" +
     courses + "<h3 style='font-size:.9rem;margin:8px 0 4px'>Sample future roles</h3>" + roles +
     "<p class='assumptions'>" + escapeHtml(path.transfer_notes || "") + "</p>";
 }
@@ -1651,9 +1637,6 @@ function openSheet(id, tier) {
     html += `<p><b>Testing:</b> UC does not consider SAT/ACT for fall 2027.</p>`;
   }
   html += `<p><b>Path fit (${escapeHtml(path.label)}):</b> ${escapeHtml(path.transfer_notes || "See course map below spine.")}</p>`;
-  if (state.parent) {
-    html += `<p><em>Parent: ask the counseling office about ASSIST.org major prep and whether this campus TAG matrix allows your intended major.</em></p>`;
-  }
   html += `<p class="assumptions">Sources retrieved ${DB.meta.retrieved_on}. Planning only — confirm on the campus site.</p>`;
   document.getElementById("sheetBody").innerHTML = html;
   sheet.hidden = false;
@@ -1767,7 +1750,6 @@ function renderAll() {
   document.querySelectorAll("#startSeg button").forEach(b => {
     b.classList.toggle("on", b.getAttribute("data-start") === state.start);
   });
-  document.getElementById("parentBar")?.classList.toggle("on", state.parent);
   document.querySelectorAll("#geoSeg button").forEach(b => {
     b.classList.toggle("on", b.getAttribute("data-geo") === state.geo_scope);
   });
@@ -1830,15 +1812,6 @@ document.querySelectorAll(".tip").forEach(btn => {
 });
 document.querySelectorAll(".modal").forEach(m => {
   m.addEventListener("click", e => { if (e.target === m) m.classList.remove("open"); });
-});
-
-document.addEventListener("keydown", e => {
-  if (e.target.matches("input, textarea, select")) return;
-  if (e.key.length === 1 && /[a-zA-Z]/.test(e.key)) {
-    state.typed = (state.typed + e.key.toLowerCase()).slice(-10);
-    if (state.typed.endsWith("parent")) { state.parent = true; state.typed = ""; renderAll(); }
-    else if (state.typed.endsWith("student")) { state.parent = false; state.typed = ""; renderAll(); }
-  }
 });
 
 renderAll();

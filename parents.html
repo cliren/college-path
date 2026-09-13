@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0f766e">
-<title>Assumptions & sources · CA College Path</title>
+<title>Parents · CA College Path</title>
 <style>
 
 :root {
@@ -39,11 +39,6 @@ ul,ol{padding-left:1.2em;margin:8px 0 12px}
 li{margin:6px 0}
 .pill-row{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
 .pill{background:var(--accent-soft);color:var(--accent);font-size:.74rem;font-weight:650;padding:4px 10px;border-radius:var(--radius-pill)}
-.campuses{display:grid;gap:8px;margin:12px 0}
-.campus{border:1px solid var(--line);border-radius:var(--radius-sm);padding:12px 14px;background:#fafbfc}
-.campus b{color:var(--accent)}
-.checklist label{display:flex;gap:12px;align-items:flex-start;min-height:var(--tap);padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer}
-.checklist input{width:20px;height:20px;margin-top:2px;accent-color:var(--accent);flex-shrink:0}
 .link-cards{display:grid;gap:10px;margin:12px 0}
 .link-card{display:block;border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px;text-decoration:none;color:inherit;background:#fafbfc}
 .link-card:hover{border-color:var(--accent);background:var(--accent-soft)}
@@ -58,7 +53,6 @@ li{margin:6px 0}
 .site-footer nav{display:flex;flex-wrap:wrap;gap:8px 14px;justify-content:center;margin-bottom:12px}
 .site-footer nav a{color:var(--accent);font-weight:650;text-decoration:none}
 .site-footer nav a:hover{text-decoration:underline}
-.kbd-hint{font-size:.78rem;color:var(--muted);margin:8px 0 0}
 @media (max-width:390px){.wrap{padding-left:12px;padding-right:12px}}
 
 </style>
@@ -67,45 +61,84 @@ li{margin:6px 0}
 <main class="wrap">
   <header class="hero">
     <h1 class="brand"><a href="index.html">CA College Path Explorer</a></h1>
-    <p class="pitch">What is solid fact vs. estimated mapping</p>
+    <p class="pitch">A calm guide for parents planning with a student</p>
   </header>
   <a class="back-link" href="index.html">← Back to explorer</a>
   <article class="panel">
-    <h1>Assumptions &amp; sources</h1>
-    <p class="lead">Planning notes so families know what is solid fact vs. estimated mapping. Confidence labels are honest on purpose.</p>
-    <h2>Core assumptions</h2>
+    <h1>For parents</h1>
+    <p class="lead">This site helps students and parents plan California college paths together — packages, GPA levers, and realistic school lists. It is a planning tool, not an official admissions decision.</p>
+
+    <div class="pill-row">
+      <span class="pill">Student + parent</span>
+      <span class="pill">CA default</span>
+      <span class="pill">Fall 2027 entry</span>
+    </div>
+
+    <h2>What this tool is for</h2>
     <ul>
-      <li>Published UC freshman GPA bands are <b>honors-weighted capped</b>. The explorer slider uses a 2.0–4.0 UC-weighted A–G planning scale.</li>
-      <li>Planning freshman mid-50 GPA bands are a <b>conservative mapping</b> (medium confidence).</li>
-      <li>TAG minimum GPA planning default is ~<b>3.2</b> where a campus-specific minimum is uncertain (medium confidence).</li>
-      <li>CSU and private mid-50 / admit figures are approximate planning data (medium / low confidence).</li>
-      <li>Planning charge / cost figures stay out of the main UI; they may log to the browser console for counselor use only.</li>
-      <li>UC SAT/ACT policy for fall 2027: <b>not required and not considered</b> (per UC Academic Senate review, July 2026 news cycle). Confirm yearly.</li>
-      <li>Region filters (East Bay commute, Bay Area, etc.) are preference tools, not admissions rules.</li>
+      <li>Explore career packages (Medicine, Business, Engineering, CS, and more) with your student.</li>
+      <li>Move simple levers — GPA, start point, region, “need a likely seat” — and watch Likely / Target / Stretch lists update.</li>
+      <li>Open school cards for plain-language fit notes. Confirm anything that matters on the campus site.</li>
+      <li>California public paths (UC, CSU, CCC) are the default. Use the CA | US toggle on the home page if you want a wider U.S. framing.</li>
     </ul>
-    <h2>What this site is / is not</h2>
+
+    <h2>This cycle — key dates</h2>
+    <div class="note">
+      <strong>UC and CSU applications:</strong> file <b>Oct 1 – Nov 30</b> (for fall 2027 entry).<br>
+      <strong>FAFSA / CA Dream Act:</strong> open from about <b>Oct 1</b> — confirm each year on the federal and CSAC sites.<br>
+      No dollar amounts are shown in this tool on purpose; talk numbers with your counselor and aid offices.
+    </div>
+
+    <h2>CCC → TAG is normal in California</h2>
+    <p>Starting at a California Community College and transferring with a <b>TAG</b> (Transfer Admission Guarantee) is a common, intentional path — not a failure path. Many strong students use it to build GPA, finish major prep, and lock a UC seat.</p>
+    <div class="btn-row">
+      <a class="btn" href="tag.html">TAG FAQ</a>
+      <a class="btn ghost" href="this-week.html">This week checklist</a>
+    </div>
+
+    <h2>How to use the home page with your student</h2>
+    <ol>
+      <li><b>Pick a package</b> that matches interest (start with Medicine if that is the goal; you can switch later).</li>
+      <li><b>Set the levers together</b> — honest GPA, freshman vs CCC start, region focus, and whether a likely seat matters this cycle.</li>
+      <li><b>Read the three stacks</b> — Likely, Target, Stretch — and talk about one backup that does not need a perfect GPA year.</li>
+      <li><b>Open a few school cards</b> — note TAG flags, major caveats, and anything to verify with a counselor.</li>
+      <li>Skim <a href="this-week.html">This week</a> for a short senior-fall checklist you can work through at home.</li>
+    </ol>
+
+    <h2>What to ask a counselor this week</h2>
     <ul>
-      <li><b>Is:</b> a planning explorer for CA high school → college paths, with medicine as the default lens.</li>
-      <li><b>Is not:</b> an official UC/CSU decision tool, a guarantee of admission, or visa / immigration advice.</li>
-      <li>Always confirm deadlines, majors, and residency on campus and system sites.</li>
+      <li>Are we on track for A–G (or CCC GE + major prep)? Any gaps to fix this term?</li>
+      <li>Which UC / CSU campuses and majors fit this GPA and course plan?</li>
+      <li>If CCC → transfer is on the table, which local colleges feed our intended major well (ASSIST.org)?</li>
+      <li>What is the school’s timeline for letters, transcripts, and FAFSA / Dream Act support?</li>
+      <li>For medicine-leaning students: bio + chem sequence, and one solid clinical or service contact.</li>
     </ul>
-    <h2>Sources (planning)</h2>
-    <ul>
-      <li>UC admissions portal — <a href="https://admission.universityofcalifornia.edu/" rel="noopener" target="_blank">admission.universityofcalifornia.edu</a> (retrieved 2026-09-12)</li>
-      <li>UC Academic Senate admissions / SAT review FAQ — <a href="https://www.universityofcalifornia.edu/news/press-releases-and-statements/academic-senate-review-admissions" rel="noopener" target="_blank">universityofcalifornia.edu news</a></li>
-      <li>CalMatters coverage of UC SAT review — <a href="https://calmatters.org/education/higher-education/2026/07/uc-sat-california/" rel="noopener" target="_blank">calmatters.org</a></li>
-      <li>CSU application dates — <a href="https://www.calstate.edu/apply/pages/application-dates-deadlines.aspx" rel="noopener" target="_blank">calstate.edu/apply</a></li>
-      <li>UC Dual Admission — <a href="https://admission.universityofcalifornia.edu/admission-requirements/transfer-requirements/uc-transfer-programs/dual-admission.html" rel="noopener" target="_blank">official Dual Admission page</a></li>
-      <li>UC TAG matrix PDF — <a href="https://admission.universityofcalifornia.edu/_assets/files/transfer-requirements/updated_202728-tag-matrix_ada.pdf" rel="noopener" target="_blank">2027–28 TAG matrix</a></li>
-      <li>UC counselor materials (e.g. mid-25/75 GPA + admit rates for CA residents) — medium confidence when mapped to the slider scale</li>
-    </ul>
-    <h2>Confidence key</h2>
-    <ul>
-      <li><b>High:</b> Official application windows, TAG campus list, Berkeley/UCLA/UCSD have no TAG.</li>
-      <li><b>Medium:</b> GPA band mapping, TAG floors, transfer mid-50s, some major exclusions.</li>
-      <li><b>Low:</b> Private admit odds, long-range job titles under AI, international seat chances.</li>
-    </ul>
-    <p class="muted">Meta retrieved_on for explorer data: 2026-09-12. Secondary pages refreshed 2026-09-13.</p>
+
+    <h2>More pages</h2>
+    <div class="link-cards">
+      <a class="link-card" href="this-week.html">
+        <p class="title">This week</p>
+        <p class="desc">Short senior-fall checklist for UC / CSU timing.</p>
+      </a>
+      <a class="link-card" href="tag.html">
+        <p class="title">TAG FAQ</p>
+        <p class="desc">How CCC → UC TAG works, and who it is for.</p>
+      </a>
+      <a class="link-card" href="news.html">
+        <p class="title">News</p>
+        <p class="desc">Curated admissions headlines and live search links.</p>
+      </a>
+      <a class="link-card" href="international.html">
+        <p class="title">International</p>
+        <p class="desc">Separate page for pathways outside the U.S. default.</p>
+      </a>
+      <a class="link-card" href="index.html">
+        <p class="title">Home · Explorer</p>
+        <p class="desc">Packages, levers, and school stacks — sit with your student here.</p>
+      </a>
+    </div>
+
+    <p class="muted">Planning tool for families · not official admissions advice · confirm deadlines and major rules on campus sites.</p>
   </article>
 </main>
 <footer class="site-footer">
