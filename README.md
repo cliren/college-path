@@ -1,5 +1,7 @@
-# CA College Path Explorer
+# College Path Explorer
 
-Password-locked static page (`index.html`). Open the file locally or serve the repo root.
+Static site for CA-default (US-aware) college path planning.
 
-Unlock with the shared password. Wrong password cannot decrypt the page contents.
+- Live: https://cliren.github.io/college-path/
+- Main: path packages + levers + school bands
+- Footer pages: TAG, This week, Assumptions, News, International

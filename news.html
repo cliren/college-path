@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f766e">
+<title>Admissions news · CA College Path</title>
+<style>
+
+:root {
+  --bg:#f3f5f7; --surface:#fff; --ink:#0f172a; --muted:#5b6b7c;
+  --line:#e3e8ee; --line-strong:#c9d3dc;
+  --accent:#0f766e; --accent-ink:#fff; --accent-soft:#e6f5f3; --accent-mid:#14b8a6;
+  --banner:#fffbeb; --banner-line:#fcd34d;
+  --radius:16px; --radius-sm:12px; --radius-pill:999px;
+  --shadow:0 1px 2px rgba(15,23,42,.05),0 6px 20px rgba(15,23,42,.06);
+  --tap:44px;
+  --font:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --space:16px; --wrap:720px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;font-family:var(--font);font-size:16px;line-height:1.55;color:var(--ink);background:var(--bg);min-height:100dvh;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent-mid);outline-offset:2px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:12px var(--space) 40px}
+.hero{padding:8px 0 4px}
+.hero .brand{font-weight:750;font-size:1.15rem;letter-spacing:-.025em;color:var(--accent);line-height:1.2;margin:0}
+.hero .brand a{color:inherit;text-decoration:none}
+.hero .pitch{margin:6px 0 0;color:var(--muted);font-size:.9rem;line-height:1.4}
+.back-link{display:inline-flex;align-items:center;gap:6px;margin:10px 0 2px;font-weight:650;font-size:.95rem;text-decoration:none}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px 16px;margin:14px 0;box-shadow:var(--shadow)}
+.panel h1{margin:0 0 8px;font-size:1.32rem;letter-spacing:-.02em;line-height:1.25}
+.panel h2{margin:22px 0 10px;font-size:1.02rem;letter-spacing:-.01em}
+.panel h2:first-of-type{margin-top:14px}
+.lead{color:var(--muted);margin:0 0 8px;font-size:.95rem}
+.note{background:var(--banner);border:1px solid var(--banner-line);border-radius:var(--radius-sm);padding:12px 14px;margin:14px 0;font-size:.92rem}
+ul,ol{padding-left:1.2em;margin:8px 0 12px}
+li{margin:6px 0}
+.pill-row{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.pill{background:var(--accent-soft);color:var(--accent);font-size:.74rem;font-weight:650;padding:4px 10px;border-radius:var(--radius-pill)}
+.campuses{display:grid;gap:8px;margin:12px 0}
+.campus{border:1px solid var(--line);border-radius:var(--radius-sm);padding:12px 14px;background:#fafbfc}
+.campus b{color:var(--accent)}
+.checklist label{display:flex;gap:12px;align-items:flex-start;min-height:var(--tap);padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.checklist input{width:20px;height:20px;margin-top:2px;accent-color:var(--accent);flex-shrink:0}
+.link-cards{display:grid;gap:10px;margin:12px 0}
+.link-card{display:block;border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px;text-decoration:none;color:inherit;background:#fafbfc}
+.link-card:hover{border-color:var(--accent);background:var(--accent-soft)}
+.link-card .title{font-weight:700;color:var(--accent);margin:0 0 4px}
+.link-card .desc{margin:0;font-size:.88rem;color:var(--muted)}
+.btn-row{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:var(--tap);padding:10px 16px;border-radius:var(--radius-sm);background:var(--accent);color:#fff!important;font-weight:650;text-decoration:none;border:none}
+.btn.ghost{background:var(--surface);color:var(--ink)!important;border:1.5px solid var(--line-strong)}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent)!important}
+.muted{color:var(--muted);font-size:.88rem}
+.site-footer{text-align:center;color:var(--muted);font-size:.82rem;padding:24px 16px 36px;line-height:1.55;max-width:var(--wrap);margin:0 auto}
+.site-footer nav{display:flex;flex-wrap:wrap;gap:8px 14px;justify-content:center;margin-bottom:12px}
+.site-footer nav a{color:var(--accent);font-weight:650;text-decoration:none}
+.site-footer nav a:hover{text-decoration:underline}
+.kbd-hint{font-size:.78rem;color:var(--muted);margin:8px 0 0}
+@media (max-width:390px){.wrap{padding-left:12px;padding-right:12px}}
+
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="hero">
+    <h1 class="brand"><a href="index.html">CA College Path Explorer</a></h1>
+    <p class="pitch">Curated CA admissions links · updated 2026-09-13</p>
+  </header>
+  <a class="back-link" href="index.html">← Back to explorer</a>
+  <article class="panel">
+    <h1>CA admissions headlines</h1>
+    <p class="lead">Curated official links for California college admissions. Static list — not a live scrape. <b>updated_on 2026-09-13</b>.</p>
+    <div class="note">
+      This page mixes hand-picked official pages with Google News search buttons.
+      Headlines change; always open the source and check the date.
+    </div>
+    <h2>Curated links</h2>
+    <div class="link-cards">
+      <a class="link-card" href="https://admission.universityofcalifornia.edu/" rel="noopener" target="_blank">
+        <p class="title">UC admissions portal</p>
+        <p class="desc">Dates, requirements, freshman and transfer hubs for the University of California.</p>
+      </a>
+      <a class="link-card" href="https://www.universityofcalifornia.edu/news/press-releases-and-statements/academic-senate-review-admissions" rel="noopener" target="_blank">
+        <p class="title">UC Senate SAT review FAQ</p>
+        <p class="desc">Academic Senate review of admissions testing — official UC statement hub.</p>
+      </a>
+      <a class="link-card" href="https://calmatters.org/education/higher-education/2026/07/uc-sat-california/" rel="noopener" target="_blank">
+        <p class="title">CalMatters: UC SAT review</p>
+        <p class="desc">Independent CA reporting on the UC SAT / admissions testing review (July 2026).</p>
+      </a>
+      <a class="link-card" href="https://www.calstate.edu/apply/pages/application-dates-deadlines.aspx" rel="noopener" target="_blank">
+        <p class="title">CSU application dates</p>
+        <p class="desc">Cal State Apply windows and deadlines — confirm before you submit.</p>
+      </a>
+      <a class="link-card" href="https://admission.universityofcalifornia.edu/admission-requirements/transfer-requirements/uc-transfer-programs/dual-admission.html" rel="noopener" target="_blank">
+        <p class="title">UC Dual Admission</p>
+        <p class="desc">CCC pathway details after some freshman outcomes; Pathways+ context.</p>
+      </a>
+      <a class="link-card" href="https://admission.universityofcalifornia.edu/_assets/files/transfer-requirements/updated_202728-tag-matrix_ada.pdf" rel="noopener" target="_blank">
+        <p class="title">TAG matrix PDF</p>
+        <p class="desc">Campus and major TAG matrix (2027–28 planning file). Check exclusions every year.</p>
+      </a>
+    </div>
+    <h2>Google News searches</h2>
+    <p>Open a live search when you want fresher headlines. These buttons run Google News queries — the site does not scrape results.</p>
+    <div class="btn-row">
+      <a class="btn" href="https://news.google.com/search?q=California%20college%20admissions&amp;hl=en-US&amp;gl=US&amp;ceid=US%3Aen" rel="noopener" target="_blank">CA college admissions</a>
+      <a class="btn ghost" href="https://news.google.com/search?q=US%20college%20admissions&amp;hl=en-US&amp;gl=US&amp;ceid=US%3Aen" rel="noopener" target="_blank">US-wide college admissions</a>
+    </div>
+    <p class="muted">Static curated list + Google search buttons · no live scrape · updated_on 2026-09-13.</p>
+  </article>
+</main>
+<footer class="site-footer">
+  <nav aria-label="More pages">
+    <a href="this-week.html">This week</a>
+    <a href="tag.html">TAG / Dual</a>
+    <a href="assumptions.html">Assumptions</a>
+    <a href="news.html">College news</a>
+    <a href="international.html">International</a>
+  </nav>
+  <div>Planning tool · not official admissions advice<br>
+  Always confirm deadlines and major rules on campus sites.</div>
+</footer>
+</body>
+</html>
