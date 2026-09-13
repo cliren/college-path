@@ -393,17 +393,6 @@ a { color: var(--accent); }
   vertical-align: middle; margin-left: 4px; cursor: help;
 }
 
-.banner-ccc {
-  background: var(--banner);
-  border: 1px solid var(--banner-line);
-  border-radius: var(--radius);
-  padding: 10px 12px;
-  margin: 0 0 12px;
-  font-size: var(--text-sm);
-  line-height: 1.4;
-}
-.banner-ccc strong { display: block; margin-bottom: 4px; color: var(--stretch); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: .04em; }
-
 .results-head {
   display: flex; flex-wrap: wrap; align-items: baseline;
   justify-content: space-between; gap: 6px 12px; margin: 0 0 10px;
@@ -720,10 +709,7 @@ a { color: var(--accent); }
       <div class="panel-levers">
         <h2>Levers</h2>
         <div id="leversBodyDesktop"></div>
-        <div class="banner-ccc" id="cccBannerDesktop" hidden style="margin-top:12px">
-          <strong>CCC + TAG backup</strong>
-          <div id="cccBannerBodyDesktop"></div>
-        </div>
+</div>
       </div>
     </aside>
 
@@ -737,11 +723,7 @@ a { color: var(--accent); }
         <h2>Other U.S. — guidance</h2>
         <div id="usPanelBody"></div>
       </div>
-
-      <div class="banner-ccc" id="cccBanner" hidden>
-        <strong>CCC + TAG backup</strong>
-        <div id="cccBannerBody"></div>
-      </div>
+</div>
 
       <div class="stacks" id="stacks">
         <section class="stack" aria-labelledby="h-likely">
@@ -1586,35 +1568,11 @@ function renderStacks() {
     fill(cols.target, nonCcc(results.target).slice(0, 10), "No target matches yet.");
     fill(cols.stretch, nonCcc(results.stretch).slice(0, 12), "No stretch/reach in view.");
   } else {
-    fill(cols.likely, nonCcc(results.likely).slice(0, 12), "No likely seats with these levers — try CCC path or lower selectivity.");
+    fill(cols.likely, nonCcc(results.likely).slice(0, 12), "No likely seats with these levers — widen region or adjust GPA.");
     fill(cols.target, nonCcc(results.target).slice(0, 10), "No target matches yet.");
     fill(cols.stretch, nonCcc(results.stretch).slice(0, 12), "No stretch/reach in view.");
   }
 
-  const banner = document.getElementById("cccBanner");
-  const body = document.getElementById("cccBannerBody");
-  const showBanner = state.start === "this_cycle_freshman" && (state.need_likely_seat || state.gpa <= 3.4);
-  if (showBanner) {
-    banner.hidden = false;
-    const tagNames = DB.schools.filter(s => s.tag && s.system === "UC").map(s => s.short).join(", ");
-    const launchList = (state.region === "commute_from_east_bay"
-      ? DB.schools.filter(s => s.system === "CCC" && s.feed_east_bay)
-      : DB.schools.filter(s => s.system === "CCC")).slice(0, 6);
-    body.innerHTML = `If freshman admits are thin, start at a CCC then use <b>TAG</b> (junior year) to ${escapeHtml(tagNames)}. East Bay launchpads: ${launchList.map(s => escapeHtml(s.short)).join(", ")}. <a href="tag.html">Learn TAG →</a>`;
-  } else if (state.start === "ccc_then_transfer") {
-    banner.hidden = false;
-    const tagNames = DB.schools.filter(s => s.tag).map(s => s.short).join(", ");
-    body.innerHTML = `You chose CCC first. File TAG in September of your CCC junior year for: ${escapeHtml(tagNames)}. Not for current HS seniors this fall. <a href="tag.html">Learn TAG →</a>`;
-  } else {
-    banner.hidden = true;
-  }
-
-  const deskBan = document.getElementById("cccBannerDesktop");
-  const deskBody = document.getElementById("cccBannerBodyDesktop");
-  if (deskBan && deskBody) {
-    deskBan.hidden = banner.hidden;
-    deskBody.innerHTML = body.innerHTML;
-  }
   document.querySelectorAll(".card[data-id]").forEach(card => {
     const open = () => openSheet(card.getAttribute("data-id"), card.getAttribute("data-tier"));
     card.addEventListener("click", (e) => {
