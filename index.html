@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0f766e">
 <title>CA College Path Explorer</title>
-<!-- v3 Approach B · package marketplace + sticky levers · unlocked -->
+<!-- v4 path-graph · unified Filters · US top-5 · unlocked -->
 <!--
   RESEARCH NOTES (retrieved_on 2026-09-12)
   UC fall 2027 freshman: app open Aug 1 2026; file Oct 1–Nov 30 2026.
@@ -552,7 +552,7 @@ a { color: var(--accent); }
 .kbd-hint { font-size: var(--text-xs); color: var(--muted); margin: 4px 0 0; }
 
 .layout-main { display: flex; flex-direction: column; gap: 0; }
-.col-levers-desktop { display: none; }
+.col-levers-desktop { display: none !important; }
 .col-results { min-width: 0; }
 
 @media (min-width: 600px) {
@@ -580,32 +580,13 @@ a { color: var(--accent); }
     padding: 10px 10px;
   }
   .layout-main {
-    display: grid;
-    grid-template-columns: 320px minmax(0, 1fr);
-    gap: 16px;
-    align-items: start;
-  }
-  .levers-strip { display: none; } /* mobile strip hidden */
-  .col-levers-desktop {
     display: block;
-    position: sticky;
-    top: 56px;
-    width: 320px;
-    max-height: calc(100dvh - 64px);
-    overflow: auto;
   }
-  .col-levers-desktop .panel-levers {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: var(--panel-pad);
-    box-shadow: var(--shadow);
-  }
-  .col-levers-desktop .panel-levers h2 {
-    margin: 0 0 8px; font-size: var(--text-md);
-  }
+  .levers-strip { display: block; } /* same Filters control as mobile */
+  .col-levers-desktop { display: none !important; }
   .col-results { min-width: 0; width: 100%; }
   .stacks { grid-template-columns: 1fr; }
+  .levers-strip .lever-grid { grid-template-columns: 1fr 1fr; }
 }
 
 @media (min-width: 1100px) {
@@ -616,6 +597,243 @@ a { color: var(--accent); }
 @media (max-width: 959px) {
   .wrap { max-width: var(--wrap-mobile); }
 }
+
+
+/* ---- v4 path map ---- */
+.path-map {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 12px 12px 10px;
+  margin: 0 0 var(--section-gap);
+  box-shadow: var(--shadow);
+}
+.path-map-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px 12px;
+  margin-bottom: 8px;
+}
+.path-map-titles { min-width: 0; flex: 1; }
+.path-map-titles .section-label { margin-bottom: 2px; }
+.path-map-summary {
+  margin: 0;
+  font-size: var(--text-xs);
+  color: var(--muted);
+  line-height: 1.35;
+}
+.path-expand {
+  min-height: var(--tap);
+  min-width: 0;
+  padding: 8px 14px;
+  font-size: var(--text-xs);
+  font-weight: 750;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1.5px solid transparent;
+  flex-shrink: 0;
+}
+.path-expand[aria-expanded="true"] {
+  background: var(--accent);
+  color: #fff;
+}
+.path-graph { display: flex; flex-direction: column; gap: 8px; }
+.path-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 0;
+}
+.path-unit { display: inline-flex; align-items: center; }
+.path-node {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  min-width: 0;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+  color: var(--ink);
+  border: 1.5px solid var(--line-strong);
+  font-size: var(--text-xs);
+  font-weight: 750;
+  box-shadow: none;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+.path-node:hover { border-color: var(--accent-mid); }
+.path-node.on {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+.path-node .kind-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--accent-mid);
+  flex-shrink: 0;
+}
+.path-node[data-kind="hs"] .kind-dot { background: #64748b; }
+.path-node[data-kind="undergrad"] .kind-dot { background: var(--accent); }
+.path-node[data-kind="exam"] .kind-dot { background: #d97706; }
+.path-node[data-kind="grad"] .kind-dot { background: #7c3aed; }
+.path-node[data-kind="training"] .kind-dot { background: #0284c7; }
+.path-node[data-kind="career"] .kind-dot { background: var(--likely); }
+.path-node[data-kind="branch"] .kind-dot { background: #db2777; }
+.path-node.is-branch { border-style: dashed; font-weight: 650; }
+.path-node.path-more {
+  background: transparent;
+  color: var(--accent);
+  border-style: dashed;
+  border-color: var(--accent-mid);
+}
+.path-edge {
+  width: 12px;
+  height: 2px;
+  background: var(--line-strong);
+  position: relative;
+  flex-shrink: 0;
+  margin: 0 3px;
+}
+.path-edge::after {
+  content: "";
+  position: absolute;
+  right: -2px; top: 50%;
+  transform: translateY(-50%);
+  border: 4px solid transparent;
+  border-left-color: var(--line-strong);
+}
+.path-row-branch {
+  padding: 4px 0 4px 10px;
+  border-left: 2px dashed var(--line-strong);
+  margin-left: 6px;
+}
+.path-row-label {
+  font-size: 0.68rem;
+  font-weight: 750;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--muted);
+  margin-right: 8px;
+  white-space: nowrap;
+}
+.path-collapsed-hint {
+  margin: 0;
+  font-size: var(--text-xs);
+  color: var(--muted);
+  font-weight: 600;
+}
+.path-detail {
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: var(--accent-soft);
+  border: 1px solid #b8e6e0;
+  border-radius: var(--radius-sm);
+}
+.path-detail[hidden] { display: none !important; }
+.path-detail h3 { margin: 0 0 2px; font-size: var(--text-sm); letter-spacing: -0.01em; }
+.path-detail .when {
+  font-size: var(--text-xs);
+  color: var(--muted);
+  font-weight: 650;
+  margin: 0 0 6px;
+}
+.path-detail p { margin: 0 0 6px; font-size: var(--text-sm); }
+.path-detail .do-now {
+  font-size: var(--text-sm);
+  padding: 8px 10px;
+  background: var(--surface);
+  border-radius: 8px;
+  margin: 6px 0;
+}
+.path-detail .next-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+.path-detail .next-chip {
+  min-height: 36px;
+  min-width: 0;
+  padding: 4px 12px;
+  font-size: var(--text-xs);
+  background: var(--surface);
+  color: var(--accent);
+  border: 1px solid var(--line-strong);
+  font-weight: 700;
+}
+.path-detail-close {
+  margin-top: 8px;
+  min-height: 40px;
+  font-size: var(--text-xs);
+}
+.results-head.emphasize {
+  outline: 3px solid var(--accent-mid);
+  outline-offset: 4px;
+  border-radius: 8px;
+  animation: pathPulse 1.4s ease;
+}
+@keyframes pathPulse {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent-mid) 50%, transparent); }
+  100% { box-shadow: 0 0 0 12px transparent; }
+}
+
+/* Mobile Filters toggle (levers strip) */
+.levers-summary-btn .filters-lead {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.levers-summary-btn .filters-icon {
+  width: 22px;
+  height: 22px;
+  color: var(--accent);
+  display: block;
+  flex-shrink: 0;
+}
+.levers-summary-btn .filters-word {
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.filters-badge {
+  display: none;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 800;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.filters-badge.on { display: inline-flex; }
+.levers-summary-btn .filters-meta {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--text-xs);
+  color: var(--muted);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: right;
+}
+.levers-summary-btn .chev { color: var(--muted); font-size: 1.1rem; flex-shrink: 0; }
+
+@media (min-width: 960px) {
+  .path-node { min-height: 36px; }
+}
+
 
 </style>
 </head>
@@ -639,12 +857,29 @@ a { color: var(--accent); }
   <section aria-labelledby="pkgHeading">
     <h2 class="section-label" id="pkgHeading">Career packages</h2>
     <div class="pkg-scroller" id="pathPackages" role="radiogroup" aria-label="Career packages"></div>
-    <div class="spine" id="journeyLine" aria-live="polite"></div>
+    <div class="spine" id="journeyLine" hidden></div>
+  </section>
+
+  <section class="path-map" id="pathMap" aria-labelledby="pathMapHeading">
+    <div class="path-map-head">
+      <div class="path-map-titles">
+        <h2 class="section-label" id="pathMapHeading">Path map</h2>
+        <p class="path-map-summary" id="pathMapSummary" aria-live="polite"></p>
+      </div>
+      <button type="button" class="path-expand" id="pathExpandBtn" aria-expanded="false" aria-controls="pathGraph">Expand path</button>
+    </div>
+    <div class="path-graph" id="pathGraph" role="group" aria-label="Career path nodes"></div>
+    <div class="path-detail" id="pathDetail" role="region" aria-live="polite" hidden></div>
   </section>
 
   <div class="levers-strip" id="leversStrip">
-    <button type="button" class="levers-summary-btn" id="leversToggle" aria-expanded="false" aria-controls="leversBodyMobile">
-      <span id="leversSummary">GPA 3.00 · CA · Freshman · East Bay · Seat on</span>
+    <button type="button" class="levers-summary-btn" id="leversToggle" aria-expanded="false" aria-controls="leversBodyMobile" aria-label="Filters">
+      <span class="filters-lead">
+        <svg class="filters-icon" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M4.15 5.05A1.25 1.25 0 0 1 5.25 4h13.5a1.25 1.25 0 0 1 .95 2.06l-5.55 6.42V18.7a1.25 1.25 0 0 1-1.9 1.07l-2.7-1.62a1.25 1.25 0 0 1-.6-1.07v-5.6L4.2 6.06A1.25 1.25 0 0 1 4.15 5.05z"/></svg>
+        <span class="filters-word">Filters</span>
+        <span class="filters-badge" id="filtersBadge" hidden>0</span>
+      </span>
+      <span class="filters-meta" id="leversSummary">GPA 3.00 · CA · Freshman · East Bay · Seat on</span>
       <span class="chev" aria-hidden="true">▾</span>
     </button>
     <div class="levers-body" id="leversBodyMobile">
@@ -710,13 +945,13 @@ a { color: var(--accent); }
     </aside>
 
     <div class="col-results">
-      <div class="results-head">
+      <div class="results-head" id="resultsHead">
         <h2>Results</h2>
         <span class="sort-hint">Best for this path first</span>
       </div>
 
       <div class="us-panel" id="usPanel" hidden>
-        <h2>Other U.S. — guidance</h2>
+        <h2>U.S. planning</h2>
         <div id="usPanelBody"></div>
       </div>
 
@@ -780,19 +1015,10 @@ a { color: var(--accent); }
 
 <script>
 (function(){
-  function place(){
-    var grid = document.getElementById("leverGrid");
-    var mobile = document.getElementById("leversBodyMobile");
-    var desktop = document.getElementById("leversBodyDesktop");
-    if(!grid||!mobile||!desktop) return;
-    if(window.matchMedia("(min-width: 960px)").matches){
-      if(grid.parentElement!==desktop) desktop.appendChild(grid);
-    } else {
-      if(grid.parentElement!==mobile) mobile.appendChild(grid);
-    }
-  }
-  place();
-  window.addEventListener("resize", place);
+  /* Unified Filters strip on all breakpoints — do not move levers into a desktop rail. */
+  var grid = document.getElementById("leverGrid");
+  var mobile = document.getElementById("leversBodyMobile");
+  if(grid && mobile && grid.parentElement!==mobile) mobile.appendChild(grid);
 })();
 </script>
 
@@ -800,11 +1026,11 @@ a { color: var(--accent); }
 
 /* HOW TO EXTEND
    1. Add schools to DB.schools with system, region, gpa bands, tag flags, families, cost_est, path_strength.
-   2. Add packaged_paths entries (label, blurb, best_for, families); wire id in levers.packaged_ids.
+   2. Add packaged_paths entries (label, blurb, families, path_graph); wire id in levers.packaged_ids.
    3. Tune match_rules thresholds; keep dollar language out of visible UI (console only).
    4. Update meta.retrieved_on and source strings when refreshing research.
    5. Secondary pages: tag.html, this-week.html, assumptions.html, how-it-works.html, news.html, international.html.
-   6. geo_scope california|us — US uses us_overview guidance, not full mid50 matching.
+   6. geo_scope california|us — US ranks DB.us_schools (top 5 per band); CA uses DB.schools.
 */
 
 const DB = {
@@ -1005,7 +1231,7 @@ const DB = {
   },
 
   us_overview: {
-    note: "This build’s deep school match DB is California-first. Outside CA we show national guidance and a short flagship list for context — not full mid50 matching.",
+    note: "US mode ranks a curated national set (public flagships + privates) with planning mid50 bands. Top 5 per Likely / Target / Stretch. Medium/low confidence — confirm on each campus. Switch back to CA for UC/CSU/CCC matching.",
     links: [
       { label: "Common App", url: "https://www.commonapp.org/" },
       { label: "FAFSA", url: "https://studentaid.gov/h/apply-for-aid/fafsa" },
@@ -1025,7 +1251,8 @@ const DB = {
       { name: "Johns Hopkins University", note: "Strong pre-med reputation · very selective", conf: "medium" }
     ]
   },
-  schools: []
+  schools: [],
+  us_schools: []
 };
 
 (function buildSchools() {
@@ -1234,6 +1461,428 @@ const DB = {
   });
 })();
 
+(function attachPathGraphs() {
+  const G = {
+    medicine: {
+      summary: "A–G science now → undergrad prereqs → clinical hours and MCAT → MD/DO, or a shorter PA / NP track.",
+      nodes: [
+        { id: "hs", label: "HS now", kind: "hs",
+          short: "A–G plus chem and bio on track",
+          detail: "Keep A–G complete with biology and chemistry (physics if you can). Math through Algebra II or pre-calc. Grades and science teachers matter more than locking a major today.",
+          when: "Grades 9–12 · this year",
+          do_now: "List remaining A–G courses. Lock bio + chem. Ask one clinic, hospital, or volunteer desk about a regular slot.",
+          next: ["undergrad"] },
+        { id: "undergrad", label: "Undergrad major", kind: "undergrad",
+          short: "Bio, chem, or any major plus prereqs",
+          detail: "Any major works if you finish med-school prereqs: bio, general chemistry, organic chemistry, physics, and stats. Results below rank campuses for this science path. A CCC start can still cover the same sequence.",
+          when: "Years 1–4 after HS, or 2+2 via CCC",
+          do_now: "Scan Results for likely and target seats that fit bio or health. Confirm the prereq sequence on ASSIST or the campus site.",
+          next: ["clinical"] },
+        { id: "clinical", label: "Clinical hours", kind: "training",
+          short: "Shadow, volunteer, or research",
+          detail: "Schools want proof you understand patient care. Hospital volunteering, scribing, EMT, or a research lab all count. Steady hours and honest reflection beat a huge hour dump.",
+          when: "Undergrad summers · a gap year is OK",
+          do_now: "Send one polite ask for a weekly volunteer or scribe shift. Keep a simple hour log.",
+          next: ["mcat"] },
+        { id: "mcat", label: "MCAT", kind: "exam",
+          short: "Exam for MD and DO programs",
+          detail: "Usually after organic chemistry and biochem. Plan a few months of study, not a cram week. DO (AACOMAS) and MD (AMCAS) both use it. Most PA and NP programs do not.",
+          when: "Junior spring or after graduation",
+          do_now: "Do not schedule a test date until chem and orgo are underway. Sketch a content calendar later.",
+          next: ["apply_md", "apply_do", "pa", "np"] },
+        { id: "apply_md", label: "Apply MD", kind: "branch",
+          short: "AMCAS allopathic cycle",
+          detail: "MD (allopathic) is one physician license. Apply early in the cycle. Letters, activities, and a calm personal statement matter as much as scores. Confirm current AAMC steps each year.",
+          when: "The summer you apply — often after junior year or a gap year",
+          do_now: "Bookmark the AAMC apply pages. List two people who could write a letter later.",
+          next: ["med_school"],
+          link: { label: "AAMC", url: "https://www.aamc.org/" } },
+        { id: "apply_do", label: "Apply DO", kind: "branch",
+          short: "AACOMAS osteopathic cycle",
+          branch_of: "apply_md",
+          detail: "DO (osteopathic) is also a full physician license, with extra training in osteopathic manipulative treatment. Same long path as MD: med school, then residency. Many students apply to both.",
+          when: "Same application summer as MD",
+          do_now: "Read AACOM how-to-apply. You can keep both MD and DO on the table.",
+          next: ["med_school"],
+          link: { label: "AACOM apply", url: "https://www.aacom.org/become-a-doctor/how-to-apply-to-osteopathic-medical-college" } },
+        { id: "pa", label: "PA track", kind: "branch",
+          short: "Shorter clinician path",
+          branch_of: "apply_md",
+          detail: "Physician assistant programs are typically two to three years after a bachelor’s plus real patient-care hours. You practice with a supervising physician. Most programs use GRE or PA-CAT, not the MCAT.",
+          when: "Apply senior year or after you have hours",
+          do_now: "If this fork appeals, start logging patient-care hours (EMT, CNA, scribe) and skim the PAEA program directory.",
+          next: ["pa_school"],
+          link: { label: "PAEA programs", url: "https://paeaonline.org/" } },
+        { id: "np", label: "NP / nursing", kind: "branch",
+          short: "RN, then advanced practice",
+          branch_of: "apply_md",
+          detail: "Nurse practitioner is an advanced-practice nursing path: BSN (or an entry MSN), RN license, then NP graduate work. Different license than MD, DO, or PA. A good fit if you want a nursing identity first.",
+          when: "BSN during or after undergrad · NP after RN practice",
+          do_now: "If this track feels right, look at BSN or accelerated nursing options next to bio majors.",
+          next: ["np_school"] },
+        { id: "med_school", label: "Med school", kind: "grad",
+          short: "Four years MD or DO",
+          detail: "Years 1–2 are classroom and labs; years 3–4 are clerkships in hospitals. Tools will keep changing notes and imaging. Judgment and how you talk with patients stay human. One step at a time.",
+          when: "Four years after you matriculate",
+          do_now: "Nothing to apply for in high school. Protect GPA and stay curious in science.",
+          next: ["residency"] },
+        { id: "pa_school", label: "PA school", kind: "grad",
+          short: "About 2–3 year PA program",
+          branch_of: "apply_md",
+          detail: "A didactic year, then clinical rotations. You graduate ready to practice with a supervising physician — usually faster than MD or DO plus residency.",
+          when: "After the bachelor’s and required hours",
+          do_now: "Keep hour logs and a prerequisite checklist if you are leaning PA.",
+          next: ["work_2030"] },
+        { id: "np_school", label: "NP program", kind: "grad",
+          short: "MSN or DNP after RN",
+          branch_of: "apply_md",
+          detail: "Graduate nursing with a population focus such as family, psych, or acute care. Clinical hours sit inside the program. License and board cert come after.",
+          when: "After RN practice · timing varies",
+          do_now: "If nursing-first, research BSN entry and California BRN steps — not MD prereqs alone.",
+          next: ["work_2030"] },
+        { id: "residency", label: "Residency", kind: "training",
+          short: "Specialty training after MD/DO",
+          detail: "You match into a specialty — family medicine, pediatrics, internal medicine, surgery, and many others. Three to seven years. This is when you become the doctor people meet. Specialty choice can wait.",
+          when: "After med school · Match year",
+          do_now: "No action in high school. Later: clerkship work and letters.",
+          next: ["work_2030"] },
+        { id: "work_2030", label: "2030 work", kind: "career",
+          short: "Physician, clinic ops, informatics",
+          detail: "Most people on this path practice as physicians, PAs, or NPs. Some move into clinic operations or clinical informatics. Human care stays central. Tools change. Plan the next class, not a title.",
+          when: "After training · 2030–2035",
+          do_now: "Pick the next node you can actually do this month — usually HS courses or a volunteer ask.",
+          next: [] }
+      ]
+    },
+    business_sciences: {
+      summary: "Science literacy plus markets: undergrad, internships in biotech or health ops, optional MBA later.",
+      nodes: [
+        { id: "hs", label: "HS now", kind: "hs",
+          short: "Math, bio, and a business spark",
+          detail: "Stay on an algebra-to-pre-calc track. Biology now; chemistry if you can. An econ, DECA, or coding elective is a bonus, not a requirement.",
+          when: "Grades 9–12",
+          do_now: "Keep A–G clean. Join one club that practices pitching, labs, or leadership.",
+          next: ["undergrad"] },
+        { id: "undergrad", label: "Undergrad mix", kind: "undergrad",
+          short: "Business plus life-science depth",
+          detail: "Look for business with a bio minor, biotech management, or a science major with econ and stats. Results below sort campuses that can host both sides.",
+          when: "Four years, or CCC then transfer",
+          do_now: "Open Results and shortlist schools with both business and science room. Watch TAG exclusions for some business majors.",
+          next: ["internships"] },
+        { id: "internships", label: "Internships", kind: "training",
+          short: "Lab, ops, or commercial summers",
+          detail: "A biotech ops, hospital admin, or science-sales summer teaches more than another club. You are translating science for people who buy, ship, or regulate it.",
+          when: "Summers after year 1 or 2",
+          do_now: "Write a 5-line intro and ask one local firm, hospital, or campus lab about a summer desk.",
+          next: ["credential"] },
+        { id: "science_depth", label: "Science depth", kind: "branch",
+          short: "Research or a double major",
+          branch_of: "undergrad",
+          detail: "If you love the bench, add research units or a science double. That keeps biotech product and clinical-ops doors open without committing to med school.",
+          when: "Years 2–4",
+          do_now: "Ask one professor how undergrads join a lab. One term is enough to test the fit.",
+          next: ["internships"] },
+        { id: "credential", label: "MBA / certs", kind: "grad",
+          short: "Optional after work years",
+          detail: "An MBA or a biotech-regs / analytics certificate is optional. Most people work two to five years first so the credential has a story. Not required to start.",
+          when: "After 2+ years of work · optional",
+          do_now: "Skip applications now. Collect internships and a writing sample instead.",
+          next: ["work_2030"] },
+        { id: "work_2030", label: "2030 work", kind: "career",
+          short: "Biotech ops, health admin, technical sales",
+          detail: "Roles sit between the lab and the market: operations, product, healthcare admin, or science consulting. AI will draft decks and track inventory. You still own judgment and trust.",
+          when: "After the bachelor’s · 2030–2035",
+          do_now: "Name one role family you could explain to a parent in two sentences.",
+          next: [] }
+      ]
+    },
+    engineering: {
+      summary: "ABET undergrad, design projects and internships, then industry — FE/PE or a master’s only if you need them.",
+      nodes: [
+        { id: "hs", label: "HS now", kind: "hs",
+          short: "Calc track, physics, making things",
+          detail: "Geometry and Algebra II on time, then pre-calc and calculus. Physics matters. Robotics, shop, or an engineering academy is helpful but not required.",
+          when: "Grades 9–12",
+          do_now: "Check you are on a calculus-ready math path. Take physics when it is offered.",
+          next: ["undergrad"] },
+        { id: "undergrad", label: "ABET major", kind: "undergrad",
+          short: "Four-year engineering degree",
+          detail: "ABET-accredited majors (mechanical, electrical, civil, computer, and others) keep the FE/PE door open. Results below tilt toward campuses with real engineering seats. UCSB TAG excludes engineering; Irvine excludes ICS — read transfer notes.",
+          when: "Four years, or CCC then transfer",
+          do_now: "Use Results to find likely and target engineering campuses. Confirm impacted majors at Cal Poly and similar.",
+          next: ["projects"] },
+        { id: "projects", label: "Projects", kind: "training",
+          short: "Design teams and labs",
+          detail: "A design clinic, formula SAE, robotics, or a faculty project is how you learn to ship. AI speeds CAD drafts; you still check the physics.",
+          when: "Years 2–4",
+          do_now: "Pick one team or lab you can actually attend this term — not five clubs.",
+          next: ["internships"] },
+        { id: "internships", label: "Internships", kind: "training",
+          short: "Industry summers",
+          detail: "One solid internship beats a perfect GPA alone. Hardware, energy, civil, or software-in-the-loop all count. Return offers often start here.",
+          when: "Summers after year 2 or 3",
+          do_now: "Make a simple project list (2–3 bullets) you can paste into an application.",
+          next: ["industry"] },
+        { id: "fe_pe", label: "FE / PE", kind: "exam",
+          short: "Optional professional exams",
+          branch_of: "industry",
+          detail: "The FE (Fundamentals of Engineering) is often taken near graduation. The PE comes after work years and is required for some civil and public-work roles, not for every engineer.",
+          when: "FE near graduation · PE after practice",
+          do_now: "No signup in high school. Later, check whether your target role actually needs a PE.",
+          next: ["industry"],
+          link: { label: "NCEES", url: "https://ncees.org/" } },
+        { id: "grad_ms", label: "MS (optional)", kind: "grad",
+          short: "Master’s if the role needs depth",
+          branch_of: "industry",
+          detail: "A master’s helps some specialties (controls, structures, semiconductors). Many engineers never need one. Work first unless a lab or visa path requires the degree.",
+          when: "After 0–3 years of work · optional",
+          do_now: "Ignore grad rankings for now. Build the bachelor’s and one project.",
+          next: ["industry"] },
+        { id: "industry", label: "Industry", kind: "career",
+          short: "Design, systems, hardware, climate tech",
+          detail: "Most graduates become design or systems engineers. Some move into embedded hardware or engineering management after years of practice. CA demand sits with chips, infrastructure, and climate tech.",
+          when: "After the bachelor’s · 2030–2035",
+          do_now: "In Results, favor campuses with ABET majors you would actually attend.",
+          next: [] }
+      ]
+    },
+    computer_science: {
+      summary: "CS undergrad, internships and a portfolio, then industry — grad school or product only if you want them.",
+      nodes: [
+        { id: "hs", label: "HS now", kind: "hs",
+          short: "Math plus one real coding class",
+          detail: "Stay on a pre-calc / calc track. AP CSP, AP CSA, or a community-college Python/Java class is enough. Physics helps. You do not need to be a prodigy.",
+          when: "Grades 9–12",
+          do_now: "Finish the next math course. Write one small program you can show (even a class project).",
+          next: ["undergrad"] },
+        { id: "undergrad", label: "CS major", kind: "undergrad",
+          short: "Algorithms, systems, electives",
+          detail: "A CS or closely related major covers programming, data structures, algorithms, and systems. Results below rank campuses. Davis TAG often excludes CS; Irvine excludes all ICS — plan transfer carefully.",
+          when: "Four years, or CCC then transfer",
+          do_now: "Open Results. If you may transfer, read the TAG note on this package.",
+          next: ["internships"] },
+        { id: "internships", label: "Internships", kind: "training",
+          short: "Summer software or data roles",
+          detail: "Internships and a small portfolio beat prestige alone under automated screens. Class projects count if you can explain the tradeoffs.",
+          when: "Summers after year 1 or 2",
+          do_now: "Put two projects on a simple page or repo. Practice explaining one of them out loud.",
+          next: ["industry"] },
+        { id: "portfolio", label: "Portfolio", kind: "training",
+          short: "Code you can talk through",
+          detail: "Two or three finished pieces — a web app, a data notebook, a systems toy — are enough. Depth and honesty beat a long list of tutorials.",
+          when: "Alongside the major",
+          do_now: "Pick one idea and finish it this term. Document what broke.",
+          next: ["industry"] },
+        { id: "grad_cs", label: "Grad school", kind: "grad",
+          short: "MS if you want research or ML depth",
+          branch_of: "industry",
+          detail: "A master’s is optional. It helps some ML, research, or visa paths. Many software roles do not require it. Work or a strong portfolio can come first.",
+          when: "After the bachelor’s · optional",
+          do_now: "No GRE planning needed in high school. Keep math strong if ML later appeals.",
+          next: ["industry"] },
+        { id: "product", label: "Product / PM", kind: "branch",
+          short: "CS plus communication",
+          branch_of: "industry",
+          detail: "Some CS majors move toward product or technical program management. You still need enough code to talk with engineers. Writing and listening matter as much as frameworks.",
+          when: "After internships or first role",
+          do_now: "Practice writing a one-page spec for a school or club tool.",
+          next: ["industry"] },
+        { id: "industry", label: "2030 work", kind: "career",
+          short: "Software, data, or technical PM",
+          detail: "Most people write and review software, data pipelines, or product decisions. AI pair-programming is normal; seniors still own architecture and ethics. Titles will keep shifting.",
+          when: "After internships · 2030–2035",
+          do_now: "Use Results to find CS seats you can actually hold, then protect math and one project.",
+          next: [] }
+      ]
+    },
+    business: {
+      summary: "Business undergrad, internships, then analyst or ops roles — MBA only after you have a work story.",
+      nodes: [
+        { id: "hs", label: "HS now", kind: "hs",
+          short: "A–G, math, and speaking",
+          detail: "Keep A–G strong through pre-calc. Econ or accounting if offered. Public speaking, DECA, or a real job (retail, family business) teaches more than a title.",
+          when: "Grades 9–12",
+          do_now: "Stay on the math track. Write one short reflection on a job, club, or family business you already know.",
+          next: ["undergrad"] },
+        { id: "undergrad", label: "Business major", kind: "undergrad",
+          short: "Core plus analytics",
+          detail: "Econ, accounting, stats, and a business calculus or finite-math course are the usual floor. Results below sort business-friendly campuses. Davis TAG may exclude Business — verify yearly.",
+          when: "Four years, or CCC then transfer",
+          do_now: "Scan Results. If you might use TAG, check excluded business majors before you fall in love with a campus.",
+          next: ["internships"] },
+        { id: "internships", label: "Internships", kind: "training",
+          short: "Analyst, ops, or nonprofit summers",
+          detail: "A finance, operations, or community-org internship is the proof employers skim first. Spreadsheet modeling and clear writing matter more than a new tool each month.",
+          when: "Summers after year 1 or 2",
+          do_now: "Learn one honest spreadsheet skill (lookups, a simple model) and save a clean sample.",
+          next: ["roles"] },
+        { id: "mba", label: "MBA (optional)", kind: "grad",
+          short: "After work years, not instead of them",
+          branch_of: "roles",
+          detail: "An MBA is a later optional credential. It helps some career switches and networks. Most people work first so the essays have a plot. You do not need it to start.",
+          when: "Typically after 2–5 years of work",
+          do_now: "Do not tour MBA rankings now. Collect internships and a writing habit.",
+          next: ["roles"] },
+        { id: "roles", label: "2030 work", kind: "career",
+          short: "Analyst, ops, founder, supply chain",
+          detail: "Early roles are often analyst, associate, or operations. Some people start a small business. AI will draft slides; you still own the recommendation. CA logistics and climate resilience sit in the ops family.",
+          when: "After the bachelor’s · 2030–2035",
+          do_now: "Name whether you like numbers, people-systems, or building something small — then pick the next class to match.",
+          next: [] }
+      ]
+    },
+    business_medicine: {
+      summary: "Care systems: science plus business undergrad, hospital internships, then MHA/MPH — or a clinical fork.",
+      nodes: [
+        { id: "hs", label: "HS now", kind: "hs",
+          short: "Bio, chem, and a leadership habit",
+          detail: "Run the same science track as pre-med (bio + chem) and add econ or a business elective if it exists. Leadership hours in a club or job help more than a title.",
+          when: "Grades 9–12",
+          do_now: "Keep A–G and science on track. Ask one clinic or community health site about volunteering.",
+          next: ["undergrad"] },
+        { id: "undergrad", label: "Health + business", kind: "undergrad",
+          short: "Bio or health sciences with a business minor",
+          detail: "Pair a health-sciences or bio core with econ, accounting, and stats. Results below mix health and business-friendly campuses. Same TAG caution as Medicine if you need a bio major.",
+          when: "Four years, or CCC then transfer",
+          do_now: "Use Results to find campuses that can host both a science sequence and business coursework.",
+          next: ["internships"] },
+        { id: "internships", label: "Hospital admin intern", kind: "training",
+          short: "Ops inside a clinic or system",
+          detail: "Shadow both a clinician and an administrator if you can. You are learning how appointments, staffing, and billing actually move. That literacy is the point of this mix.",
+          when: "Summers · year 2 onward",
+          do_now: "Write one hospital volunteer or unit-clerk office and ask about a regular shift.",
+          next: ["credential"] },
+        { id: "credential", label: "MHA / MPH", kind: "grad",
+          short: "Optional systems master’s",
+          detail: "An MHA or MPH is a common next credential for people who want hospital or public-health operations. Not required to start an entry ops role. Clinical paths (PA, nursing, med) remain open if you kept science prereqs.",
+          when: "After the bachelor’s · optional",
+          do_now: "Keep science prereqs alive if you might still want a clinical fork. No applications yet.",
+          next: ["work_2030"] },
+        { id: "clinical_fork", label: "Clinical fork", kind: "branch",
+          short: "PA, NP, or pre-med still possible",
+          branch_of: "credential",
+          detail: "If patient care pulls harder than ops, switch the map to Medicine. You will need clinical hours and the right exam. The business coursework is not wasted — clinic leaders use it.",
+          when: "Whenever the pull is clear",
+          do_now: "If you feel this pull, tap the Medicine package and expand that path.",
+          next: ["work_2030"] },
+        { id: "work_2030", label: "2030 work", kind: "career",
+          short: "Clinic admin, digital health, commercial",
+          detail: "Hospital and clinic administration, health-startup operations, or pharma and device commercial roles. You translate between care and systems. Tools will automate routine ops; people still decide.",
+          when: "After the bachelor’s or a master’s · 2030–2035",
+          do_now: "Decide whether this month is a science class or a volunteer shift — both are valid.",
+          next: [] }
+      ]
+    },
+    cs_biology: {
+      summary: "Code meets life science: computational bio undergrad, lab-plus-code internships, then industry or a bioinformatics MS.",
+      nodes: [
+        { id: "hs", label: "HS now", kind: "hs",
+          short: "Bio, chem, calc, one CS class",
+          detail: "You need both sides early: biology and chemistry, a calculus track, and one real coding class. Neither side is optional if you want this mix to stay honest.",
+          when: "Grades 9–12",
+          do_now: "Enroll in the next science and the next math. Add intro CS if your school or a CCC offers it.",
+          next: ["undergrad"] },
+        { id: "undergrad", label: "Comp bio major", kind: "undergrad",
+          short: "Bio sequence plus programming",
+          detail: "Look for bioinformatics, computational biology, or a bio + CS double. You still need the bio sequence, chemistry, programming, and discrete math. Results below favor campuses that host both. Watch ICS TAG bans at Irvine.",
+          when: "Four years, or CCC then transfer",
+          do_now: "Open Results and shortlist schools with bio and CS pathways — not CS-only prestige.",
+          next: ["lab_code"] },
+        { id: "lab_code", label: "Lab + code", kind: "training",
+          short: "Wet lab and a repo",
+          detail: "A term in a wet lab plus a small analysis repo is the portfolio. You learn what data actually looks like. AI can draft scripts; you still need to know if the biology is nonsense.",
+          when: "Years 2–4",
+          do_now: "Ask one campus or community lab how undergrads join. Keep a notebook of what you ran.",
+          next: ["internships"] },
+        { id: "internships", label: "Internships", kind: "training",
+          short: "Genomics, biotech tooling, health tech",
+          detail: "Summer work in a sequencing core, a biotech tools team, or a health-tech group beats another generic software internship for this mix.",
+          when: "Summers after year 2 or 3",
+          do_now: "Write a 5-line blurb: one biology question and one script you used. That is your intro.",
+          next: ["industry"] },
+        { id: "ms_bioinfo", label: "MS bioinformatics", kind: "grad",
+          short: "Common, not mandatory",
+          branch_of: "industry",
+          detail: "A master’s is common for computational biology titles. Industry still hires strong bachelor’s graduates who can talk to both a biologist and an engineer. Work or research can come first.",
+          when: "After the bachelor’s · optional",
+          do_now: "Keep both math and a lab habit. Grad rankings can wait.",
+          next: ["industry"] },
+        { id: "industry", label: "2030 work", kind: "career",
+          short: "Bioinformatics, computational bio, health tech",
+          detail: "Genomics pipelines, drug-discovery tooling, and clinical AI validation all sit here. Wet-lab partners still matter. Titles will keep changing; the mix of code and biology will not.",
+          when: "After internships or an MS · 2030–2035",
+          do_now: "Use Results to find campuses that actually teach both sides, then protect the next science class.",
+          next: [] }
+      ]
+    }
+  };
+  Object.keys(G).forEach(function (id) {
+    if (DB.packaged_paths[id]) DB.packaged_paths[id].path_graph = G[id];
+  });
+})();
+
+
+
+(function buildUsSchools() {
+  const keys = ["medicine","business_sciences","business","business_medicine","engineering","computer_science","cs_biology"];
+  const rows = [
+    ["us_arizona","University of Arizona","Arizona","Public","southwest",[3.15,3.65],87,false,null,"low","Large public · relatively accessible OOS · confirm residency and aid.","Accessible public seat · health and engineering options",[7,6,6,7,7,6,6]],
+    ["us_alabama","University of Alabama","Alabama","Public","south",[3.15,3.70],80,true,[1100,1360],"low","Large public · accessible planning band · honors and aid vary.","Accessible public seat · business options",[5,6,7,5,6,5,4]],
+    ["us_indiana","Indiana University Bloomington","Indiana","Public","midwest",[3.20,3.75],80,true,[1180,1380],"low","Kelley business is well known · OOS charges differ.","Business standout · accessible campus",[6,7,9,6,5,6,5]],
+    ["us_msu","Michigan State University","Michigan State","Public","midwest",[3.25,3.75],84,false,null,"low","Large public research · relatively accessible.","Accessible research campus · health options",[7,6,6,7,6,6,6]],
+    ["us_iowa","University of Iowa","Iowa","Public","midwest",[3.25,3.75],86,false,null,"low","Public flagship · strong writing and health programs.","Accessible flagship · health",[7,6,6,7,5,5,5]],
+    ["us_minnesota","University of Minnesota Twin Cities","Minnesota","Public","midwest",[3.35,3.80],77,true,[1300,1480],"medium","Public research · Twin Cities · OOS competitive for some majors.","Research public · health and engineering",[8,7,6,7,7,6,7]],
+    ["us_pennstate","Pennsylvania State University","Penn State","Public","northeast",[3.40,3.80],55,true,[1220,1420],"medium","Large public · many campuses; University Park is the flagship.","Engineering and business volume",[6,6,7,6,8,7,5]],
+    ["us_ohiostate","Ohio State University","Ohio State","Public","midwest",[3.45,3.85],53,true,[1260,1450],"medium","Large public research · pre-health volume · OOS varies.","Research public · health",[8,7,7,8,7,6,6]],
+    ["us_purdue","Purdue University","Purdue","Public","midwest",[3.50,3.90],53,true,[1210,1450],"medium","Engineering and CS standout among publics.","Engineering / CS strength",[5,6,6,5,10,9,6]],
+    ["us_tamu","Texas A&M University","Texas A&M","Public","southwest",[3.45,3.85],63,true,[1160,1380],"medium","Large public · engineering volume · Texas residency matters.","Engineering · large public",[6,6,6,6,8,6,5]],
+    ["us_wisc","University of Wisconsin–Madison","UW–Madison","Public","midwest",[3.50,3.90],49,true,[1340,1510],"medium","Public flagship · research and pre-health.","Research flagship · bio",[8,7,6,7,7,7,8]],
+    ["us_uiuc","University of Illinois Urbana-Champaign","UIUC","Public","midwest",[3.55,3.90],44,true,[1350,1530],"medium","Engineering and CS are highly regarded · CS is competitive.","Engineering / CS",[6,6,7,5,10,10,7]],
+    ["us_maryland","University of Maryland, College Park","Maryland","Public","northeast",[3.50,3.90],45,true,[1330,1510],"medium","Public research near DC · CS and engineering competitive.","CS / public affairs / STEM",[6,6,7,6,8,8,6]],
+    ["us_boulder","University of Colorado Boulder","CU Boulder","Public","west",[3.40,3.85],80,true,[1180,1400],"low","Public flagship · aerospace and environmental lean.","Accessible west flagship · engineering",[6,6,6,5,8,7,5]],
+    ["us_florida","University of Florida","Florida","Public","southeast",[3.60,3.95],23,true,[1320,1470],"medium","Selective public · residency matters a great deal.","Selective public · broad strength",[7,7,7,7,7,7,6]],
+    ["us_michigan","University of Michigan","Michigan","Public","midwest",[3.80,4.00],18,true,[1350,1530],"medium","Public flagship · strong research and pre-health · competitive OOS.","Research + pre-health + business",[9,8,9,8,9,8,8]],
+    ["us_uva","University of Virginia","UVA","Public","southeast",[3.75,4.00],17,true,[1400,1540],"medium","Public flagship · selective · check OOS rules.","Selective public · business/liberal arts",[7,7,8,7,6,6,5]],
+    ["us_unc","University of North Carolina at Chapel Hill","UNC","Public","southeast",[3.70,3.95],17,true,[1350,1520],"medium","Public flagship · OOS seats limited.","Public health + research",[8,7,8,8,5,6,6]],
+    ["us_gatech","Georgia Institute of Technology","Georgia Tech","Public","southeast",[3.75,4.00],16,true,[1370,1530],"medium","Engineering and CS standout · OOS competitive.","Engineering / CS",[5,6,6,5,10,10,7]],
+    ["us_utaustin","University of Texas at Austin","UT Austin","Public","southwest",[3.70,4.00],29,true,[1230,1480],"medium","Large public · STEM and business · residency matters a lot.","Business + STEM public",[7,8,9,7,8,8,6]],
+    ["us_uw","University of Washington","UW Seattle","Public","west",[3.75,4.00],28,true,[1320,1500],"medium","Public research · bio and CS · competitive OOS.","Bio / CS / health",[8,8,6,7,8,9,9]],
+    ["us_ucla","University of California, Los Angeles","UCLA","Public","west",[3.90,4.00],10,false,null,"medium","CA flagship shown as a national option. UC ignores SAT/ACT for fall 2027.","CA-national · health + research",[10,8,9,9,8,9,8]],
+    ["us_berkeley","University of California, Berkeley","UC Berkeley","Public","west",[3.90,4.00],12,false,null,"medium","CA flagship shown as a national option. UC ignores SAT/ACT for fall 2027.","CA-national · engineering + CS",[7,7,8,6,10,10,8]],
+    ["us_nyu","New York University","NYU","Private","northeast",[3.70,3.95],12,true,[1450,1570],"medium","Private · urban · aid varies widely.","Business + urban campus",[6,7,9,6,5,7,5]],
+    ["us_usc","University of Southern California","USC","Private","west",[3.80,4.00],10,true,[1410,1530],"medium","Private · LA · aid varies.","Business + communications + health",[8,8,9,8,7,7,7]],
+    ["us_bu","Boston University","Boston University","Private","northeast",[3.70,3.95],14,true,[1410,1510],"medium","Private · broad majors · check testing policy yearly.","Urban private · health",[7,6,7,7,6,6,6]],
+    ["us_vandy","Vanderbilt University","Vanderbilt","Private","south",[3.85,4.00],6,true,[1490,1570],"medium","Highly selective private · strong pre-health.","Pre-health + research",[9,7,7,8,6,6,7]],
+    ["us_rice","Rice University","Rice","Private","southwest",[3.85,4.00],8,true,[1500,1570],"medium","Selective private · STEM-forward · Houston.","STEM private",[7,7,6,6,9,8,7]],
+    ["us_northwestern","Northwestern University","Northwestern","Private","midwest",[3.85,4.00],7,true,[1490,1560],"medium","Selective private · journalism, research, pre-health.","Research private",[8,8,8,8,7,7,7]],
+    ["us_duke","Duke University","Duke","Private","southeast",[3.90,4.00],6,true,[1490,1570],"medium","Highly selective · research and pre-health.","Research + pre-health",[9,7,7,8,7,7,8]],
+    ["us_jhu","Johns Hopkins University","Johns Hopkins","Private","northeast",[3.90,4.00],7,true,[1520,1560],"medium","Strong pre-med reputation · very selective.","Medicine / public health / research",[10,8,6,9,7,7,9]],
+    ["us_cmu","Carnegie Mellon University","Carnegie Mellon","Private","northeast",[3.80,4.00],11,true,[1480,1560],"medium","CS and engineering intensity · very specialized admits.","CS / engineering",[4,6,6,4,10,10,8]],
+    ["us_stanford","Stanford University","Stanford","Private","west",[3.95,4.00],4,true,[1500,1570],"medium","Highly selective private · treat as a reach for almost everyone.","National reach",[9,8,9,8,10,10,9]],
+    ["us_mit","Massachusetts Institute of Technology","MIT","Private","northeast",[3.95,4.00],4,true,[1520,1570],"medium","Highly selective · engineering and CS. Treat as a reach.","Engineering / CS reach",[6,7,5,5,10,10,9]],
+    ["us_harvard","Harvard University","Harvard","Private","northeast",[3.95,4.00],3,true,[1490,1580],"medium","Highly selective. Treat as a reach. Planning band only.","National reach",[8,7,8,7,6,6,6]],
+    ["us_yale","Yale University","Yale","Private","northeast",[3.95,4.00],5,true,[1480,1560],"medium","Highly selective. Treat as a reach. Planning band only.","National reach",[7,6,7,6,5,5,6]],
+    ["us_chicago","University of Chicago","UChicago","Private","midwest",[3.90,4.00],5,true,[1510,1560],"medium","Highly selective private · academic intensity.","National reach · research",[6,6,7,5,5,6,5]]
+  ];
+  DB.us_schools = rows.map(function (r) {
+    const id=r[0], name=r[1], short=r[2], system=r[3], region=r[4], plan=r[5], rate=r[6], satUsed=r[7], satMid=r[8], conf=r[9], notes=r[10], strengths=r[11], ps=r[12];
+    const o = {
+      id: id, name: name, short: short, system: system, region: region,
+      sat_used: !!satUsed,
+      sat_mid50: satMid,
+      freshman: { planning_gpa_mid50: plan, admit_rate: rate, confidence: conf, source: "approx_planning_us" },
+      transfer: null, tag: false, us_national: true,
+      families: ["health","bio","stem","cs","engineering","business"],
+      strengths: strengths.split(" · "),
+      notes: notes,
+      path_strength: {},
+      maps_query: name
+    };
+    keys.forEach(function (k, i) { o.path_strength[k] = ps[i]; });
+    return o;
+  });
+})();
+
 const state = {
   path: DB.levers.path,
   gpa: DB.levers.gpa,
@@ -1242,7 +1891,9 @@ const state = {
   start: DB.levers.start,
   region: DB.levers.region,
   need_likely_seat: DB.levers.need_likely_seat,
-  geo_scope: DB.levers.geo_scope || "california"
+  geo_scope: DB.levers.geo_scope || "california",
+  pathMapExpanded: false,
+  pathNode: null
 };
 
 const TIPS = {
@@ -1378,7 +2029,50 @@ function scoreSchool(school, path) {
   return { school, tier, score, why, mode, fam, pstr };
 }
 
+function scoreUsSchool(school, path) {
+  const band = school.freshman && school.freshman.planning_gpa_mid50;
+  const admitRate = school.freshman && school.freshman.admit_rate;
+  let tier = classifyGPA(state.gpa, band, admitRate);
+  tier = applySat(school, tier);
+  const fam = familyOverlap(school, path);
+  const pstr = pathStrength(school, path.id || state.path);
+  const tierScore = { likely: 4, target: 3, stretch: 2, reach: 1 }[tier] || 1;
+  let score = tierScore + fam + pstr * 0.14;
+  if (state.need_likely_seat && (tier === "likely" || tier === "target")) score += 0.8;
+  if (school.freshman && school.freshman.confidence === "low") score -= 0.05;
+  let why;
+  if (tier === "likely") why = "Your planning GPA sits at or above this US campus band.";
+  else if (tier === "target") why = "Inside or near the US planning mid50.";
+  else if (tier === "stretch") why = "Below typical mid50 — still possible with a sharp application.";
+  else why = "Well below mid50 — treat as a reach, keep backups.";
+  why += " US planning only (" + ((school.freshman && school.freshman.confidence) || "low") + " confidence).";
+  if (school.sat_used && state.sat >= 400) why += " SAT considered in this sketch.";
+  return { school, tier, score, why, mode: "us_freshman", fam, pstr };
+}
+
+function filterAndRankUs() {
+  const path = DB.packaged_paths[state.path];
+  const results = [];
+  (DB.us_schools || []).forEach(school => {
+    if (!school.freshman) return;
+    const r = scoreUsSchool(school, path);
+    if (path.combo && r.fam < 0.25) return;
+    results.push(r);
+  });
+  function bandSort(a, b) {
+    const ps = (b.pstr || 0) - (a.pstr || 0);
+    if (ps !== 0) return ps;
+    return b.score - a.score;
+  }
+  results.sort(bandSort);
+  const likely = results.filter(r => r.tier === "likely").sort(bandSort).slice(0, 5);
+  const target = results.filter(r => r.tier === "target").sort(bandSort).slice(0, 5);
+  const stretch = results.filter(r => r.tier === "stretch" || r.tier === "reach").sort(bandSort).slice(0, 5);
+  return { likely, target, stretch, all: results };
+}
+
 function filterAndRank() {
+  if (state.geo_scope === "us") return filterAndRankUs();
   const path = DB.packaged_paths[state.path];
   const results = [];
   DB.schools.forEach(school => {
@@ -1468,17 +2162,9 @@ function renderUsPanel() {
   const links = (o.links || []).map(l =>
     `<a class="us-link" href="${escapeHtml(l.url)}" target="_blank" rel="noopener">${escapeHtml(l.label)}</a>`
   ).join("");
-  const cards = (o.flagships || []).map(f =>
-    `<div class="us-card"><div class="name">${escapeHtml(f.name)}</div>` +
-    `<div class="meta">confidence ${escapeHtml(f.conf)} · national context</div>` +
-    `<div class="why">${escapeHtml(f.note)}</div></div>`
-  ).join("");
   el.innerHTML = `<p class="us-note">${escapeHtml(o.note)}</p>` +
     `<div class="us-links">${links}</div>` +
-    `<h3 class="us-sub">National flagship / private examples</h3>` +
-    `<p class="us-note">Qualitative only — no invented mid50 GPAs. Confirm on each school site.</p>` +
-    `<div class="us-grid">${cards}</div>` +
-    `<p class="us-note">For Medicine outside CA, start with AAMC / AACOMAS timelines and state residency rules. Switch Location back to California for deep UC/CSU/CCC matching.</p>`;
+    `<p class="us-note">Stacks below are US-wide top 5 per band from Filters (path, GPA, SAT if used, likely-seat). Reach folds into Stretch. CCC start is a CA mechanic — these picks are freshman planning. Confirm residency and testing on each campus site.</p>`;
 }
 
 function renderPackages() {
@@ -1498,7 +2184,7 @@ function renderPackages() {
       `<span class="pkg-tagline">${escapeHtml(p.tagline || p.blurb || "")}</span>` +
       `<span class="pkg-years">${escapeHtml(p.years_hint || "")}</span></span>` +
       (state.path === id ? `<span class="pkg-check" aria-hidden="true">✓</span>` : "");
-    b.addEventListener("click", () => { state.path = id; renderAll(); });
+    b.addEventListener("click", () => { if (state.path !== id) state.pathNode = null; state.path = id; renderAll(); });
     el.appendChild(b);
   });
 }
@@ -1507,11 +2193,15 @@ function renderJourney() {
   const path = DB.packaged_paths[state.path];
   const spineLab = document.getElementById("pathSpineLabel");
   if (spineLab) spineLab.textContent = path ? "(" + path.label + ")" : "";
-  const startLabel = state.start === "ccc_then_transfer" ? "CCC" : "HS → freshman and/or CCC";
-  const parts = ["HS", startLabel === "CCC" ? "CCC" : "frosh/CCC", "transfer", "BA", "next cred", "2030 work"];
-  document.getElementById("journeyLine").innerHTML = parts
-    .map((p, i) => (i ? '<span class="arrow">→</span> ' : "") + "<b>" + p + "</b>")
-    .join(" ");
+  const jl = document.getElementById("journeyLine");
+  if (jl && !jl.hidden) {
+    const startLabel = state.start === "ccc_then_transfer" ? "CCC" : "HS → freshman and/or CCC";
+    const parts = ["HS", startLabel === "CCC" ? "CCC" : "frosh/CCC", "transfer", "BA", "next cred", "2030 work"];
+    jl.innerHTML = parts
+      .map((p, i) => (i ? '<span class="arrow">→</span> ' : "") + "<b>" + p + "</b>")
+      .join(" ");
+  }
+  renderPathGraph();
   const fb = document.getElementById("futureBody");
   const roles = (path.future_roles || []).map(r =>
     `<div style="margin:4px 0"><strong>${escapeHtml(r.role)}</strong> — ${escapeHtml(r.note)}</div>`
@@ -1552,10 +2242,20 @@ function renderStacks() {
     if (!arr.length) { el.innerHTML = `<div class="empty">${emptyMsg}</div>`; return; }
     el.innerHTML = arr.map(cardHTML).join("");
   }
+  const hint = document.querySelector(".sort-hint");
+  if (hint) {
+    hint.textContent = state.geo_scope === "us"
+      ? "US-wide · top 5 per band · planning"
+      : "Best for this path first";
+  }
   const nonCcc = arr => arr.filter(r => r.school.system !== "CCC");
   const cccOnly = arr => arr.filter(r => r.school.system === "CCC");
 
-  if (state.start === "ccc_then_transfer") {
+  if (state.geo_scope === "us") {
+    fill(cols.likely, (results.likely || []).slice(0, 5), "No likely US picks at this GPA — raise GPA or watch Target.");
+    fill(cols.target, (results.target || []).slice(0, 5), "No target US picks yet — move GPA or SAT.");
+    fill(cols.stretch, (results.stretch || []).slice(0, 5), "No stretch/reach US picks in view.");
+  } else if (state.start === "ccc_then_transfer") {
     fill(cols.likely, [...cccOnly(results.likely), ...nonCcc(results.likely)].slice(0, 12), "No likely matches — widen region or adjust GPA.");
     fill(cols.target, nonCcc(results.target).slice(0, 10), "No target matches yet.");
     fill(cols.stretch, nonCcc(results.stretch).slice(0, 12), "No stretch/reach in view.");
@@ -1587,8 +2287,12 @@ function renderStacks() {
   return results;
 }
 
+function findSchoolById(id) {
+  return (DB.schools || []).find(s => s.id === id) || (DB.us_schools || []).find(s => s.id === id) || null;
+}
+
 function openSheet(id, tier) {
-  const school = DB.schools.find(s => s.id === id);
+  const school = findSchoolById(id);
   if (!school) return;
   logCostOne(school);
   const sheet = document.getElementById("sheet");
@@ -1687,6 +2391,151 @@ function renderAssumptions() {
 }
 
 
+
+function getPathGraph(path) {
+  return (path && path.path_graph) || { summary: "", nodes: [] };
+}
+
+function renderPathRow(nodes, label, isBranch, selected) {
+  if (!nodes.length) return "";
+  let h = `<div class="path-row${isBranch ? " path-row-branch" : ""}" role="list">`;
+  if (isBranch) h += `<span class="path-row-label">${escapeHtml(label)}</span>`;
+  nodes.forEach((n, i) => {
+    const on = selected === n.id ? " on" : "";
+    const br = (n.kind === "branch" || n.branch_of) ? " is-branch" : "";
+    h += `<span class="path-unit" role="listitem">`;
+    h += `<button type="button" class="path-node${on}${br}" data-id="${escapeHtml(n.id)}" data-kind="${escapeHtml(n.kind || "")}" aria-pressed="${selected === n.id ? "true" : "false"}" aria-expanded="${selected === n.id ? "true" : "false"}" aria-controls="pathDetail">`;
+    h += `<span class="kind-dot" aria-hidden="true"></span>${escapeHtml(n.label)}</button>`;
+    if (i < nodes.length - 1) h += `<span class="path-edge" aria-hidden="true"></span>`;
+    h += `</span>`;
+  });
+  h += `</div>`;
+  return h;
+}
+
+function emphasizeResults() {
+  const head = document.getElementById("resultsHead") || document.querySelector(".results-head");
+  const stacks = document.getElementById("stacks");
+  if (head) {
+    head.classList.add("emphasize");
+    setTimeout(() => head.classList.remove("emphasize"), 1600);
+  }
+  const target = stacks || head;
+  if (target && target.scrollIntoView) {
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
+function selectPathNode(id, nodesById) {
+  if (state.pathNode === id) state.pathNode = null;
+  else state.pathNode = id;
+  const node = nodesById[id];
+  if (node && node.branch_of) state.pathMapExpanded = true;
+  renderPathGraph();
+  if (state.pathNode && node && node.kind === "undergrad") emphasizeResults();
+}
+
+function renderPathDetail(node, byId) {
+  const el = document.getElementById("pathDetail");
+  if (!el) return;
+  if (!node) { el.hidden = true; el.innerHTML = ""; return; }
+  el.hidden = false;
+  const nextBtns = (node.next || []).map(nid => {
+    const t = byId[nid];
+    if (!t) return "";
+    return `<button type="button" class="next-chip" data-next="${escapeHtml(nid)}">Next: ${escapeHtml(t.label)}</button>`;
+  }).join("");
+  const link = node.link
+    ? `<p><a href="${escapeHtml(node.link.url)}" target="_blank" rel="noopener">${escapeHtml(node.link.label)}</a></p>`
+    : "";
+  const seeSchools = node.kind === "undergrad"
+    ? `<button type="button" class="next-chip" id="pathSeeSchools">See schools in Results ↓</button>`
+    : "";
+  el.innerHTML =
+    `<h3>${escapeHtml(node.label)}</h3>` +
+    `<p class="when">${escapeHtml(node.when || "")}</p>` +
+    `<p>${escapeHtml(node.detail || node.short || "")}</p>` +
+    `<div class="do-now"><b>Do now:</b> ${escapeHtml(node.do_now || "")}</div>` +
+    link +
+    `<div class="next-links">${nextBtns}${seeSchools}</div>` +
+    `<button type="button" class="ghost path-detail-close" id="pathDetailClose">Close</button>`;
+  el.querySelectorAll("[data-next]").forEach(b => {
+    b.addEventListener("click", () => {
+      const nid = b.getAttribute("data-next");
+      const t = byId[nid];
+      if (t && t.branch_of) state.pathMapExpanded = true;
+      state.pathNode = nid;
+      renderPathGraph();
+      if (t && t.kind === "undergrad") emphasizeResults();
+    });
+  });
+  const see = document.getElementById("pathSeeSchools");
+  if (see) see.addEventListener("click", emphasizeResults);
+  const close = document.getElementById("pathDetailClose");
+  if (close) close.addEventListener("click", () => { state.pathNode = null; renderPathGraph(); });
+}
+
+function renderPathGraph() {
+  const path = DB.packaged_paths[state.path] || {};
+  const g = getPathGraph(path);
+  const nodes = g.nodes || [];
+  const byId = {};
+  nodes.forEach(n => { byId[n.id] = n; });
+  const main = nodes.filter(n => !n.branch_of);
+  const parentIds = [];
+  nodes.forEach(n => {
+    if (n.branch_of && parentIds.indexOf(n.branch_of) === -1) parentIds.push(n.branch_of);
+  });
+  const expanded = !!state.pathMapExpanded;
+  const selected = (state.pathNode && byId[state.pathNode]) ? state.pathNode : null;
+  if (state.pathNode && !selected) state.pathNode = null;
+
+  const heading = document.getElementById("pathMapHeading");
+  if (heading) heading.textContent = "Path map · " + (path.label || "");
+  const summary = document.getElementById("pathMapSummary");
+  if (summary) summary.textContent = g.summary || "";
+  const expBtn = document.getElementById("pathExpandBtn");
+  const forkNodes = nodes.filter(n => n.branch_of);
+  if (expBtn) {
+    const hasForks = forkNodes.length > 0;
+    expBtn.hidden = !hasForks;
+    expBtn.setAttribute("aria-expanded", expanded ? "true" : "false");
+    expBtn.textContent = expanded ? "Collapse path" : "Expand path";
+  }
+
+  const graph = document.getElementById("pathGraph");
+  if (!graph) return;
+  let html = renderPathRow(main, "Main path", false, selected);
+  if (!expanded && forkNodes.length) {
+    const names = [];
+    forkNodes.forEach(n => { if (names.indexOf(n.label) === -1) names.push(n.label); });
+    html += `<div class="path-row"><span class="path-unit">`;
+    html += `<button type="button" class="path-node path-more" id="pathShowForks" aria-expanded="false">+ ${forkNodes.length} forks</button>`;
+    html += `</span></div>`;
+    html += `<p class="path-collapsed-hint">Hidden: ${names.map(escapeHtml).join(" · ")}</p>`;
+  }
+  if (expanded) {
+    parentIds.forEach(pid => {
+      const kids = nodes.filter(n => n.branch_of === pid);
+      const parent = byId[pid];
+      const label = parent ? ("Alt · " + parent.label) : "Alternate track";
+      html += renderPathRow(kids, label, true, selected);
+    });
+  }
+  graph.innerHTML = html;
+  graph.querySelectorAll(".path-node[data-id]").forEach(btn => {
+    btn.addEventListener("click", () => selectPathNode(btn.getAttribute("data-id"), byId));
+  });
+  const more = document.getElementById("pathShowForks");
+  if (more) {
+    more.addEventListener("click", () => {
+      state.pathMapExpanded = true;
+      renderPathGraph();
+    });
+  }
+  renderPathDetail(selected ? byId[selected] : null, byId);
+}
+
 function leversSummary() {
   const gpa = state.gpa.toFixed(2);
   const res = state.resident ? "CA" : "non-CA";
@@ -1704,9 +2553,34 @@ function leversSummary() {
   return `GPA ${gpa} · ${res} · ${start} · ${reg} · ${seat}`;
 }
 
+function countActiveFilters() {
+  const d = DB.levers;
+  let n = 0;
+  if (Math.abs(state.gpa - d.gpa) > 0.001) n++;
+  if ((state.sat || 0) !== (d.sat || 0)) n++;
+  if (state.resident !== d.resident) n++;
+  if (state.start !== d.start) n++;
+  if (state.region !== d.region) n++;
+  if (state.need_likely_seat !== d.need_likely_seat) n++;
+  return n;
+}
+
 function syncLeversChrome() {
   const sum = document.getElementById("leversSummary");
   if (sum) sum.textContent = leversSummary();
+  const n = countActiveFilters();
+  const badge = document.getElementById("filtersBadge");
+  if (badge) {
+    badge.textContent = String(n);
+    badge.hidden = n === 0;
+    badge.classList.toggle("on", n > 0);
+  }
+  const tog = document.getElementById("leversToggle");
+  if (tog) {
+    const open = tog.getAttribute("aria-expanded") === "true";
+    tog.setAttribute("aria-label",
+      (open ? "Close filters" : "Filters") + (n ? ", " + n + " active" : ""));
+  }
   const geoNote = document.getElementById("geoNote");
   if (geoNote) {
     geoNote.textContent = state.geo_scope === "us"
@@ -1723,12 +2597,18 @@ document.getElementById("leversToggle")?.addEventListener("click", () => {
   strip.classList.toggle("expanded");
   const expanded = strip.classList.contains("expanded");
   document.getElementById("leversToggle").setAttribute("aria-expanded", expanded ? "true" : "false");
+  syncLeversChrome();
+});
+document.getElementById("pathExpandBtn")?.addEventListener("click", () => {
+  state.pathMapExpanded = !state.pathMapExpanded;
+  renderPathGraph();
 });
 
 document.addEventListener("keydown", e => {
   if (e.key === "Escape") {
     closeSheet();
     document.querySelectorAll(".modal.open").forEach(m => m.classList.remove("open"));
+    if (state.pathNode) { state.pathNode = null; renderPathGraph(); }
   }
 });
 
@@ -1830,6 +2710,6 @@ window.__spotcheck = function() {
 </body>
 </html>
 <!--
-  HOW TO EXTEND: DB.schools / packaged_paths; no charge language in UI.
-  Approach B: package marketplace + sticky levers. Footer pages separate.
+  HOW TO EXTEND: DB.schools / packaged_paths + path_graph; no charge language in UI.
+  v4: expandable path map under packages; mobile Filters toggle. Footer pages separate.
 -->
