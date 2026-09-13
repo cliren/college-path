@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0f766e">
-<title>TAG & Dual Admission · CA College Path</title>
+<title>TAG FAQ · CCC→UC Transfer Admission Guarantee · CA College Path</title>
 <style>
-
 :root {
   --bg:#f3f5f7; --surface:#fff; --ink:#0f172a; --muted:#5b6b7c;
   --line:#e3e8ee; --line-strong:#c9d3dc;
   --accent:#0f766e; --accent-ink:#fff; --accent-soft:#e6f5f3; --accent-mid:#14b8a6;
   --banner:#fffbeb; --banner-line:#fcd34d;
+  --warn:#fef2f2; --warn-line:#fecaca; --warn-ink:#991b1b;
   --radius:16px; --radius-sm:12px; --radius-pill:999px;
   --shadow:0 1px 2px rgba(15,23,42,.05),0 6px 20px rgba(15,23,42,.06);
   --tap:44px;
@@ -22,35 +22,43 @@
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{margin:0;font-family:var(--font);font-size:16px;line-height:1.55;color:var(--ink);background:var(--bg);min-height:100dvh;-webkit-font-smoothing:antialiased}
 a{color:var(--accent)}
-a:focus-visible,button:focus-visible{outline:3px solid var(--accent-mid);outline-offset:2px}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--accent-mid);outline-offset:2px}
 .wrap{max-width:var(--wrap);margin:0 auto;padding:12px var(--space) 40px}
 .hero{padding:8px 0 4px}
 .hero .brand{font-weight:750;font-size:1.15rem;letter-spacing:-.025em;color:var(--accent);line-height:1.2;margin:0}
 .hero .brand a{color:inherit;text-decoration:none}
 .hero .pitch{margin:6px 0 0;color:var(--muted);font-size:.9rem;line-height:1.4}
-.back-link{display:inline-flex;align-items:center;gap:6px;margin:10px 0 2px;font-weight:650;font-size:.95rem;text-decoration:none}
+.back-link{display:inline-flex;align-items:center;gap:6px;margin:10px 0 2px;font-weight:650;font-size:.95rem;text-decoration:none;min-height:var(--tap)}
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px 16px;margin:14px 0;box-shadow:var(--shadow)}
 .panel h1{margin:0 0 8px;font-size:1.32rem;letter-spacing:-.02em;line-height:1.25}
-.panel h2{margin:22px 0 10px;font-size:1.02rem;letter-spacing:-.01em}
+.panel h2{margin:22px 0 10px;font-size:1.05rem;letter-spacing:-.01em;color:var(--accent)}
 .panel h2:first-of-type{margin-top:14px}
-.lead{color:var(--muted);margin:0 0 8px;font-size:.95rem}
+.lead{color:var(--muted);margin:0 0 10px;font-size:.95rem}
+.intro p{margin:0 0 10px}
 .note{background:var(--banner);border:1px solid var(--banner-line);border-radius:var(--radius-sm);padding:12px 14px;margin:14px 0;font-size:.92rem}
+.warn{background:var(--warn);border:1px solid var(--warn-line);border-radius:var(--radius-sm);padding:14px 14px;margin:14px 0;font-size:.95rem;color:var(--warn-ink)}
+.warn strong{display:block;margin-bottom:6px;font-size:1rem}
 ul,ol{padding-left:1.2em;margin:8px 0 12px}
 li{margin:6px 0}
 .pill-row{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
 .pill{background:var(--accent-soft);color:var(--accent);font-size:.74rem;font-weight:650;padding:4px 10px;border-radius:var(--radius-pill)}
-.campuses{display:grid;gap:8px;margin:12px 0}
-.campus{border:1px solid var(--line);border-radius:var(--radius-sm);padding:12px 14px;background:#fafbfc}
-.campus b{color:var(--accent)}
-.checklist label{display:flex;gap:12px;align-items:flex-start;min-height:var(--tap);padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer}
-.checklist input{width:20px;height:20px;margin-top:2px;accent-color:var(--accent);flex-shrink:0}
+.pill.off{background:#f1f5f9;color:var(--muted)}
+.faq{margin:12px 0 4px;display:grid;gap:8px}
+.faq details{border:1px solid var(--line);border-radius:var(--radius-sm);background:#fafbfc;overflow:hidden}
+.faq details[open]{background:#fff;border-color:var(--accent-mid)}
+.faq summary{cursor:pointer;list-style:none;font-weight:700;padding:14px 16px;min-height:var(--tap);display:flex;align-items:center;justify-content:space-between;gap:12px;color:var(--ink)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";flex-shrink:0;width:28px;height:28px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:1.1rem;line-height:1}
+.faq details[open] summary::after{content:"–"}
+.faq .ans{padding:0 16px 16px;color:var(--ink);font-size:.95rem}
+.faq .ans p:first-child{margin-top:0}
 .link-cards{display:grid;gap:10px;margin:12px 0}
 .link-card{display:block;border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px;text-decoration:none;color:inherit;background:#fafbfc}
 .link-card:hover{border-color:var(--accent);background:var(--accent-soft)}
 .link-card .title{font-weight:700;color:var(--accent);margin:0 0 4px}
 .link-card .desc{margin:0;font-size:.88rem;color:var(--muted)}
 .btn-row{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:var(--tap);padding:10px 16px;border-radius:var(--radius-sm);background:var(--accent);color:#fff!important;font-weight:650;text-decoration:none;border:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:var(--tap);padding:10px 16px;border-radius:var(--radius-sm);background:var(--accent);color:#fff!important;font-weight:650;text-decoration:none;border:none;text-align:center}
 .btn.ghost{background:var(--surface);color:var(--ink)!important;border:1.5px solid var(--line-strong)}
 .btn.ghost:hover{border-color:var(--accent);color:var(--accent)!important}
 .muted{color:var(--muted);font-size:.88rem}
@@ -58,30 +66,32 @@ li{margin:6px 0}
 .site-footer nav{display:flex;flex-wrap:wrap;gap:8px 14px;justify-content:center;margin-bottom:12px}
 .site-footer nav a{color:var(--accent);font-weight:650;text-decoration:none}
 .site-footer nav a:hover{text-decoration:underline}
-.kbd-hint{font-size:.78rem;color:var(--muted);margin:8px 0 0}
 @media (max-width:390px){.wrap{padding-left:12px;padding-right:12px}}
-
 </style>
 </head>
 <body>
 <main class="wrap">
   <header class="hero">
     <h1 class="brand"><a href="index.html">CA College Path Explorer</a></h1>
-    <p class="pitch">TAG is for CCC juniors · not HS seniors this fall</p>
+    <p class="pitch">CCC → UC Transfer Admission Guarantee (TAG) FAQ</p>
   </header>
-  <a class="back-link" href="index.html">← Back to explorer</a>
+  <a class="back-link" href="index.html">← Back to Home</a>
+
   <article class="panel">
-    <h1>TAG &amp; Dual Admission</h1>
-    <p class="lead">Plain-language guide for California UC transfer paths. Written for grade 10 reading level.</p>
-    <div class="note">
-      <strong>If you are a high school senior this September:</strong> TAG is <b>not</b> for you right now.
-      TAG is filed in September of your <b>community college junior year</b>. Keep TAG as a backup plan if you start at a CCC later.
+    <h1>TAG FAQ: CCC → UC Transfer Admission Guarantee</h1>
+    <div class="intro">
+      <p><b>TAG</b> (Transfer Admission Guarantee) is a UC program for eligible California Community College (CCC) students. If you meet campus GPA, unit, course, and major rules, one TAG campus guarantees your admission for that major.</p>
+      <p>You file TAG once, for one campus, through <b>UC TAP</b> in September. You still must submit the regular UC application in October–November for the <b>same major</b>.</p>
+      <p>TAG is a backup path for students already on (or planning) a CCC → UC transfer track — not a freshman tool.</p>
     </div>
-    <h2>What is TAG?</h2>
-    <p><b>TAG</b> means <b>Transfer Admission Guarantee</b>. It is a UC promise for eligible California Community College (CCC) students who meet GPA, course, and major rules. You pick one TAG campus and file in September.</p>
-    <p>TAG is part of the UC transfer system. It is separate from your UC freshman application this fall.</p>
-    <h2>Six TAG campuses</h2>
-    <div class="pill-row">
+
+    <div class="warn" role="alert">
+      <strong>HS seniors do NOT file TAG this September</strong>
+      TAG is for CCC juniors (typically Sept 1–30 of the year before transfer). High school seniors applying as freshmen this fall should ignore the TAG filing window and use the UC freshman application instead.
+    </div>
+
+    <h2>Quick campus map</h2>
+    <div class="pill-row" aria-label="TAG campuses">
       <span class="pill">Davis</span>
       <span class="pill">Irvine</span>
       <span class="pill">Merced</span>
@@ -89,35 +99,185 @@ li{margin:6px 0}
       <span class="pill">Santa Barbara</span>
       <span class="pill">Santa Cruz</span>
     </div>
-    <div class="campuses">
-      <div class="campus"><b>UC Davis</b> — Strong bio/health options; some business/CS majors may be excluded from TAG.</div>
-      <div class="campus"><b>UC Irvine</b> — Popular; watch exclusions (e.g. some arts, nursing, and ICS majors).</div>
-      <div class="campus"><b>UC Merced</b> — Growing campus; often more TAG flexibility.</div>
-      <div class="campus"><b>UC Riverside</b> — Broad TAG majors; verify Art Studio and impacted lists yearly.</div>
-      <div class="campus"><b>UC Santa Barbara</b> — Engineering and some arts often excluded from TAG.</div>
-      <div class="campus"><b>UC Santa Cruz</b> — Generally open with screening; check major requirements.</div>
+    <div class="pill-row" aria-label="No TAG campuses">
+      <span class="pill off">No TAG: Berkeley</span>
+      <span class="pill off">No TAG: UCLA</span>
+      <span class="pill off">No TAG: UCSD</span>
     </div>
-    <h2>No TAG at these UCs</h2>
-    <p>These campuses do <b>not</b> offer TAG. You can still transfer there through the regular UC transfer process:</p>
-    <ul>
-      <li><b>UC Berkeley</b></li>
-      <li><b>UCLA</b></li>
-      <li><b>UC San Diego</b></li>
-    </ul>
-    <h2>Dual Admission / Pathways+</h2>
-    <p>After some freshman denials, UC may invite you to a California Community College pathway. That path can lead back to UC later. <b>Pathways+</b> uses TAG-style mechanics for eligible students.</p>
-    <p>If an offer letter mentions Dual Admission, ask your counselor what campus and major it covers — and what GPA and courses you must keep.</p>
-    <p><a href="https://admission.universityofcalifornia.edu/admission-requirements/transfer-requirements/uc-transfer-programs/dual-admission.html" rel="noopener" target="_blank">Official Dual Admission page (UC)</a></p>
-    <h2>Medicine path tip</h2>
-    <p>If you want medicine later, look for TAG-eligible bio or health majors at Davis, Irvine, Merced, Riverside, UCSB, or UCSC. Always confirm major prep on ASSIST and the TAG matrix for your year.</p>
-    <p><a href="https://admission.universityofcalifornia.edu/_assets/files/transfer-requirements/updated_202728-tag-matrix_ada.pdf" rel="noopener" target="_blank">TAG matrix PDF (2027–28 planning)</a></p>
-    <h2>Confidence notes</h2>
-    <ul>
-      <li>Campus list and “no TAG” campuses: high confidence (UC admissions).</li>
-      <li>Excluded majors change by year — medium confidence until you check the current matrix.</li>
-      <li>Planning TAG GPA floor used in the explorer (~3.2 where uncertain): medium confidence.</li>
-    </ul>
-    <p class="muted">Updated for planning on 2026-09-13. Confirm everything on official UC sites before you act.</p>
+
+    <h2>Frequently asked questions</h2>
+    <div class="faq">
+
+      <details open>
+        <summary>1. What is TAG?</summary>
+        <div class="ans">
+          <p><b>Transfer Admission Guarantee</b> is a contract-style promise from participating UC campuses to CCC students who meet published requirements (GPA, units, English/math pattern, major prep, and deadlines).</p>
+          <p>You choose <b>one</b> TAG campus. Meet every condition and that campus guarantees admission to the TAG major. Miss a condition and you still may be reviewed for regular transfer admission — but the guarantee is gone.</p>
+          <p>TAG is not binding: if you are admitted via TAG, you can still enroll elsewhere.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>2. Which UCs offer TAG?</summary>
+        <div class="ans">
+          <p><b>TAG campuses:</b> UC Davis, UC Irvine, UC Merced, UC Riverside, UC Santa Barbara, UC Santa Cruz.</p>
+          <p><b>No TAG:</b> UC Berkeley, UCLA, and UC San Diego. You can still transfer there through the regular UC transfer process (competitive review, no guarantee).</p>
+          <p>Campus cards and official pages are listed below.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>3. When do I apply?</summary>
+        <div class="ans">
+          <ul>
+            <li><b>TAG via UC TAP:</b> September 1–30 (year before you transfer).</li>
+            <li><b>UC application:</b> October 1–November 30 for the same fall transfer term.</li>
+            <li><b>Majors must match:</b> List the same major on TAG and on the UC app (usually as first choice). Changing the major after TAG can void the guarantee.</li>
+            <li>Many campuses also require a Transfer Academic Update (TAU) in January — confirm on the campus page.</li>
+          </ul>
+          <div class="btn-row">
+            <a class="btn" href="https://uctap.universityofcalifornia.edu/" target="_blank" rel="noopener noreferrer">Open UC TAP</a>
+            <a class="btn ghost" href="https://admission.universityofcalifornia.edu/how-to-apply/" target="_blank" rel="noopener noreferrer">UC application hub</a>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>4. What are the shared unit / GPA basics?</summary>
+        <div class="ans">
+          <p>Exact floors differ by campus and major. Shared planning basics (confirm on the official matrix):</p>
+          <ul>
+            <li>About <b>30 UC-transferable semester units</b> completed by TAG submission (often by end of prior summer).</li>
+            <li><b>60 UC-transferable semester units</b> by the end of the spring term before transfer (with CCC unit / last-term rules).</li>
+            <li><b>English + math pattern:</b> typically one English composition and one UC-transferable math by end of fall of the TAG year; a second English often by spring — campus wording varies.</li>
+            <li>Campus-specific minimum GPAs (often overall and/or major-prep) apply — some are higher for selective majors.</li>
+          </ul>
+          <p>Use the official TAG matrix PDF for fall 2027 / spring 2028 planning — do not rely on memory or third-party summaries.</p>
+          <div class="btn-row">
+            <a class="btn" href="https://admission.universityofcalifornia.edu/_assets/files/transfer-requirements/updated_202728-tag-matrix_ada.pdf" target="_blank" rel="noopener noreferrer">TAG Matrix PDF (2027–28)</a>
+            <a class="btn ghost" href="https://admission.universityofcalifornia.edu/admission-requirements/transfer-requirements/" target="_blank" rel="noopener noreferrer">UC transfer programs hub</a>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>5. Can I TAG for any major?</summary>
+        <div class="ans">
+          <p><b>No.</b> Each campus excludes some majors (and sometimes entire colleges). Exclusions change by year.</p>
+          <p>Brief examples — <b>confirm on the campus page + matrix</b> before you file:</p>
+          <ul>
+            <li><b>UC Davis:</b> Business, Computer Science, Data Science, and other selective majors are often not TAG-eligible.</li>
+            <li><b>UC Irvine:</b> commonly excludes Art, Business Administration, Dance, Music, Nursing, and <b>all ICS</b> majors.</li>
+            <li><b>UC Santa Barbara:</b> excludes College of Creative Studies, College of Engineering, and some audition/portfolio arts majors.</li>
+            <li><b>Others:</b> Merced, Riverside, and Santa Cruz also screen or exclude majors — check each year.</li>
+          </ul>
+          <p>Open each campus card below for the live exclusion list.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>6. What is Dual Admission / Pathways+?</summary>
+        <div class="ans">
+          <p>After some UC freshman outcomes, UC may invite students into a <b>Dual Admission</b> path that starts at a California Community College and can lead back to UC (often with TAG-style mechanics under Pathways+).</p>
+          <p>If an offer letter mentions Dual Admission or Pathways+, ask a counselor which campus/major it covers and which GPA and course conditions you must keep.</p>
+          <p><a href="https://admission.universityofcalifornia.edu/admission-requirements/transfer-requirements/uc-transfer-programs/dual-admission.html" target="_blank" rel="noopener noreferrer">Official Dual Admission page (UC)</a></p>
+        </div>
+      </details>
+
+      <details>
+        <summary>7. How does ASSIST fit?</summary>
+        <div class="ans">
+          <p><b>ASSIST</b> shows official articulation: which CCC courses count as major preparation for a specific UC campus and major.</p>
+          <p>TAG guarantees admission only when you complete the required major prep (and GPA) for that campus. Build your course plan on ASSIST, then verify TAG conditions on the campus page and matrix.</p>
+          <p><a href="https://assist.org/" target="_blank" rel="noopener noreferrer">ASSIST.org — major preparation</a></p>
+        </div>
+      </details>
+
+      <details>
+        <summary>8. What should a current HS senior do instead?</summary>
+        <div class="ans">
+          <ul>
+            <li><b>Do not</b> open UC TAP to file TAG this September — that window is for CCC juniors transferring next fall.</li>
+            <li>File the <b>UC freshman application</b> Oct 1–Nov 30 if UC is a target.</li>
+            <li>Keep CCC → UC as a backup: strong A–G courses now, then a clear transfer plan (ASSIST major prep + TAG later) if you enroll at a community college.</li>
+            <li>If you receive a Dual Admission / Pathways+ invite after freshman decisions, read it carefully with a counselor.</li>
+          </ul>
+          <div class="btn-row">
+            <a class="btn" href="https://admission.universityofcalifornia.edu/how-to-apply/" target="_blank" rel="noopener noreferrer">UC how to apply</a>
+            <a class="btn ghost" href="index.html">Back to explorer</a>
+          </div>
+        </div>
+      </details>
+
+    </div>
+
+    <h2>Campus TAG pages</h2>
+    <p class="lead">Official admissions pages for each TAG campus. All open in a new tab.</p>
+    <div class="link-cards">
+      <a class="link-card" href="https://www.ucdavis.edu/admissions/undergraduate/transfer/transfer-admission-guarantee" target="_blank" rel="noopener noreferrer">
+        <p class="title">UC Davis TAG</p>
+        <p class="desc">Transfer Admission Guarantee overview. Business / CS / Data Science often excluded — confirm yearly.</p>
+      </a>
+      <a class="link-card" href="https://www.ucdavis.edu/admissions/undergraduate/transfer/transfer-admission-guarantee/requirements" target="_blank" rel="noopener noreferrer">
+        <p class="title">UC Davis TAG requirements</p>
+        <p class="desc">Detailed unit, GPA, and course conditions for Davis TAG.</p>
+      </a>
+      <a class="link-card" href="https://www.admissions.uci.edu/apply/transfer-students/guaranteed-admissions.php" target="_blank" rel="noopener noreferrer">
+        <p class="title">UC Irvine Guaranteed Admissions / TAG</p>
+        <p class="desc">Irvine TAG rules. Watch Art, Business Admin, Dance, Music, Nursing, and all ICS exclusions.</p>
+      </a>
+      <a class="link-card" href="https://admissions.ucmerced.edu/transfer/tag" target="_blank" rel="noopener noreferrer">
+        <p class="title">UC Merced TAG</p>
+        <p class="desc">Merced Transfer Admission Guarantee — often broader major coverage; verify current list.</p>
+      </a>
+      <a class="link-card" href="https://discover.ucr.edu/transfer" target="_blank" rel="noopener noreferrer">
+        <p class="title">UC Riverside Transfer (TAG)</p>
+        <p class="desc">UCR transfer hub including TAG information. Confirm major eligibility each cycle.</p>
+      </a>
+      <a class="link-card" href="https://admissions.ucsb.edu/tag" target="_blank" rel="noopener noreferrer">
+        <p class="title">UC Santa Barbara TAG</p>
+        <p class="desc">UCSB TAG (Letters &amp; Science). Creative Studies, Engineering, and some arts majors excluded.</p>
+      </a>
+      <a class="link-card" href="https://admissions.ucsc.edu/transfer-admission-guarantee-tag" target="_blank" rel="noopener noreferrer">
+        <p class="title">UC Santa Cruz TAG</p>
+        <p class="desc">Official UCSC Transfer Admission Guarantee page — check screening majors and GPA floors.</p>
+      </a>
+    </div>
+
+    <h2>System tools</h2>
+    <p class="lead">UC-wide tools and documents. All open in a new tab.</p>
+    <div class="link-cards">
+      <a class="link-card" href="https://uctap.universityofcalifornia.edu/" target="_blank" rel="noopener noreferrer">
+        <p class="title">UC TAP (TAG application)</p>
+        <p class="desc">Submit TAG Sept 1–30. One campus only. CCC juniors — not HS seniors.</p>
+      </a>
+      <a class="link-card" href="https://admission.universityofcalifornia.edu/how-to-apply/" target="_blank" rel="noopener noreferrer">
+        <p class="title">UC application</p>
+        <p class="desc">Oct 1–Nov 30 undergraduate application hub (freshman and transfer).</p>
+      </a>
+      <a class="link-card" href="https://admission.universityofcalifornia.edu/_assets/files/transfer-requirements/updated_202728-tag-matrix_ada.pdf" target="_blank" rel="noopener noreferrer">
+        <p class="title">TAG Matrix PDF (fall 2027 / spring 2028)</p>
+        <p class="desc">Official campus &amp; major matrix — unit, GPA, and exclusion source of truth.</p>
+      </a>
+      <a class="link-card" href="https://admission.universityofcalifornia.edu/admission-requirements/transfer-requirements/uc-transfer-programs/dual-admission.html" target="_blank" rel="noopener noreferrer">
+        <p class="title">Dual Admission</p>
+        <p class="desc">UC Dual Admission / Pathways+ overview for CCC pathway students.</p>
+      </a>
+      <a class="link-card" href="https://assist.org/" target="_blank" rel="noopener noreferrer">
+        <p class="title">ASSIST</p>
+        <p class="desc">Official CCC ↔ UC major preparation articulation.</p>
+      </a>
+      <a class="link-card" href="https://admission.universityofcalifornia.edu/admission-requirements/transfer-requirements/" target="_blank" rel="noopener noreferrer">
+        <p class="title">UC transfer programs hub</p>
+        <p class="desc">System transfer requirements, TAG context, and related programs.</p>
+      </a>
+    </div>
+
+    <div class="note">
+      <strong>Planning reminder:</strong> This page is a plain-language FAQ for families — not official admissions advice.
+      Always confirm deadlines, GPA floors, and major exclusions on the campus page and the current TAG matrix before you act.
+    </div>
+    <p class="muted">Updated for planning on 2026-09-13. External links use https and open in a new tab.</p>
   </article>
 </main>
 <footer class="site-footer">
