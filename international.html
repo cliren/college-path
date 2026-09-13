@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0f766e">
-<title>International medicine paths · CA College Path</title>
+<title>International paths · CA College Path</title>
 <style>
 
 :root {
@@ -12,11 +12,14 @@
   --line:#e3e8ee; --line-strong:#c9d3dc;
   --accent:#0f766e; --accent-ink:#fff; --accent-soft:#e6f5f3; --accent-mid:#14b8a6;
   --banner:#fffbeb; --banner-line:#fcd34d;
+  --likely:#dcfce7; --likely-ink:#166534;
+  --comp:#ffedd5; --comp-ink:#9a3412;
+  --selective:#fee2e2; --selective-ink:#991b1b;
   --radius:16px; --radius-sm:12px; --radius-pill:999px;
   --shadow:0 1px 2px rgba(15,23,42,.05),0 6px 20px rgba(15,23,42,.06);
   --tap:44px;
   --font:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-  --space:16px; --wrap:720px;
+  --space:16px; --wrap:960px;
 }
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
@@ -31,34 +34,90 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--accent-mid);outline
 .back-link{display:inline-flex;align-items:center;gap:6px;margin:10px 0 2px;font-weight:650;font-size:.95rem;text-decoration:none}
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px 16px;margin:14px 0;box-shadow:var(--shadow)}
 .panel h1{margin:0 0 8px;font-size:1.32rem;letter-spacing:-.02em;line-height:1.25}
-.panel h2{margin:22px 0 10px;font-size:1.02rem;letter-spacing:-.01em}
-.panel h2:first-of-type{margin-top:14px}
 .lead{color:var(--muted);margin:0 0 8px;font-size:.95rem}
 .note{background:var(--banner);border:1px solid var(--banner-line);border-radius:var(--radius-sm);padding:12px 14px;margin:14px 0;font-size:.92rem}
-ul,ol{padding-left:1.2em;margin:8px 0 12px}
-li{margin:6px 0}
-.pill-row{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
-.pill{background:var(--accent-soft);color:var(--accent);font-size:.74rem;font-weight:650;padding:4px 10px;border-radius:var(--radius-pill)}
-.campuses{display:grid;gap:8px;margin:12px 0}
-.campus{border:1px solid var(--line);border-radius:var(--radius-sm);padding:12px 14px;background:#fafbfc}
-.campus b{color:var(--accent)}
-.checklist label{display:flex;gap:12px;align-items:flex-start;min-height:var(--tap);padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer}
-.checklist input{width:20px;height:20px;margin-top:2px;accent-color:var(--accent);flex-shrink:0}
-.link-cards{display:grid;gap:10px;margin:12px 0}
-.link-card{display:block;border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px;text-decoration:none;color:inherit;background:#fafbfc}
-.link-card:hover{border-color:var(--accent);background:var(--accent-soft)}
-.link-card .title{font-weight:700;color:var(--accent);margin:0 0 4px}
-.link-card .desc{margin:0;font-size:.88rem;color:var(--muted)}
-.btn-row{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:var(--tap);padding:10px 16px;border-radius:var(--radius-sm);background:var(--accent);color:#fff!important;font-weight:650;text-decoration:none;border:none}
-.btn.ghost{background:var(--surface);color:var(--ink)!important;border:1.5px solid var(--line-strong)}
-.btn.ghost:hover{border-color:var(--accent);color:var(--accent)!important}
 .muted{color:var(--muted);font-size:.88rem}
+.small{font-size:.82rem;color:var(--muted)}
+
+.country-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:16px;
+  margin:16px 0 8px;
+}
+@media (min-width:800px){
+  .country-grid{grid-template-columns:1fr 1fr;gap:18px}
+}
+
+.card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:16px 14px 14px;
+  box-shadow:var(--shadow);
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  min-width:0;
+}
+.card-head{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:8px}
+.card-head h2{margin:0;font-size:1.15rem;letter-spacing:-.02em;color:var(--accent)}
+.fit{margin:0;font-size:.9rem;color:var(--muted);line-height:1.4;flex:1 1 100%}
+.badge{
+  display:inline-flex;align-items:center;
+  font-size:.72rem;font-weight:700;letter-spacing:.01em;
+  padding:4px 10px;border-radius:var(--radius-pill);white-space:nowrap;
+}
+.badge.likely{background:var(--likely);color:var(--likely-ink)}
+.badge.competitive{background:var(--comp);color:var(--comp-ink)}
+.badge.selective{background:var(--selective);color:var(--selective-ink)}
+
+.meta-box{
+  background:#fafbfc;border:1px solid var(--line);
+  border-radius:var(--radius-sm);padding:10px 12px;font-size:.88rem;
+}
+.meta-box dt{font-weight:700;color:var(--ink);margin:0 0 2px}
+.meta-box dd{margin:0 0 8px;color:var(--muted)}
+.meta-box dd:last-child{margin-bottom:0}
+.conf{font-size:.75rem;font-weight:650;color:var(--accent)}
+
+.chips{
+  display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 0;
+}
+.chip{
+  appearance:none;border:1.5px solid var(--line-strong);background:#fff;
+  color:var(--ink);font:inherit;font-size:.78rem;font-weight:650;
+  padding:7px 12px;border-radius:var(--radius-pill);cursor:pointer;
+  min-height:36px;line-height:1.2;
+}
+.chip[aria-pressed="true"]{
+  background:var(--accent);color:#fff;border-color:var(--accent);
+}
+.chip:hover{border-color:var(--accent)}
+
+.track-panel{display:none;margin:4px 0 0}
+.track-panel.active{display:block}
+.track-panel h3{margin:0 0 6px;font-size:.95rem}
+.track-panel ol,.track-panel ul{margin:0 0 4px;padding-left:1.15em}
+.track-panel li{margin:5px 0;font-size:.9rem}
+
+.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.links a{
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:.82rem;font-weight:650;text-decoration:none;
+  padding:6px 10px;border-radius:var(--radius-sm);
+  border:1px solid var(--line);background:#fafbfc;color:var(--accent);
+}
+.links a:hover{border-color:var(--accent);background:var(--accent-soft)}
+.map-pin{margin-left:auto}
+.map-pin a{
+  background:var(--accent-soft);border-color:var(--accent);
+}
+
 .site-footer{text-align:center;color:var(--muted);font-size:.82rem;padding:24px 16px 36px;line-height:1.55;max-width:var(--wrap);margin:0 auto}
 .site-footer nav{display:flex;flex-wrap:wrap;gap:8px 14px;justify-content:center;margin-bottom:12px}
 .site-footer nav a{color:var(--accent);font-weight:650;text-decoration:none}
 .site-footer nav a:hover{text-decoration:underline}
-.kbd-hint{font-size:.78rem;color:var(--muted);margin:8px 0 0}
 @media (max-width:390px){.wrap{padding-left:12px;padding-right:12px}}
 
 </style>
@@ -67,61 +126,418 @@ li{margin:6px 0}
 <main class="wrap">
   <header class="hero">
     <h1 class="brand"><a href="index.html">CA College Path Explorer</a></h1>
-    <p class="pitch">Singapore · Australia · short UK/Canada/Ireland notes</p>
+    <p class="pitch">Abroad study paths · sorted most practical first for CA HS students</p>
   </header>
-  <a class="back-link" href="index.html">← Back to explorer</a>
+  <a class="back-link" href="index.html">← Back to Home</a>
+
   <article class="panel">
-    <h1>International medicine-path notes</h1>
-    <p class="lead">Short orientation for Singapore and Australia, plus brief UK / Canada / Ireland pointers. Official links only — <b>no invented admit rates</b>. Not visa or immigration advice.</p>
+    <h1>International study paths</h1>
+    <p class="lead">Countries are ordered by what is usually <b>most accessible / practical</b> for a typical California high school student exploring abroad — not by prestige. Keep a strong CA plan (UC / CSU / CCC + TAG) as your base.</p>
     <div class="note">
-      <strong>Confidence:</strong> Program names and official portals — medium/high if links resolve.
-      Seat chances, fees, and visa rules change often — treat as <b>low confidence</b> until you verify.
-      This page does <b>not</b> give visa advice. Use embassy / university international offices.
+      <strong>Sort order:</strong> Australia → United Kingdom → Ireland → Canada → Singapore.<br>
+      <strong>Not visa advice.</strong> Fees, deadlines, and seat rules change every year — confirm on the school site before you apply.
+      Tuition appears on this international page only (ranges + currency). Confidence labels are honest on purpose. Retrieved ~2026-09-13. No invented admit rates.
     </div>
-    <h2>Singapore</h2>
-    <p>Medicine in Singapore is selective and usually aimed at local pathways, but universities publish international applicant pages. Dual-degree and graduate-entry options exist (for example Duke-NUS).</p>
-    <ul>
-      <li><a href="https://medicine.nus.edu.sg/" rel="noopener" target="_blank">NUS Yong Loo Lin School of Medicine</a></li>
-      <li><a href="https://www.ntu.edu.sg/medicine" rel="noopener" target="_blank">NTU Lee Kong Chian School of Medicine</a></li>
-      <li><a href="https://www.duke-nus.edu.sg/" rel="noopener" target="_blank">Duke-NUS Medical School</a> (graduate-entry MD)</li>
-      <li><a href="https://www.moe.gov.sg/" rel="noopener" target="_blank">Singapore Ministry of Education</a> — policy context</li>
-    </ul>
-    <p class="muted">Planning note: expect early deadlines, strong science grades, and interviews. Confirm whether your diploma type (US HS, A-levels, IB) is accepted.</p>
-    <h2>Australia</h2>
-    <p>Australia offers undergraduate-entry and graduate-entry medicine. International students usually apply through university portals and national systems such as UAC (undergrad) or GEMSAS (many graduate-entry schools). English tests and medicine aptitude tests may apply.</p>
-    <ul>
-      <li><a href="https://www.studyaustralia.gov.au/" rel="noopener" target="_blank">Study Australia</a> — official government study portal</li>
-      <li><a href="https://medicaldeans.org.au/" rel="noopener" target="_blank">Medical Deans Australia &amp; New Zealand</a></li>
-      <li><a href="https://gemsas.edu.au/" rel="noopener" target="_blank">GEMSAS</a> — graduate-entry medicine applications (many schools)</li>
-      <li><a href="https://www.uac.edu.au/" rel="noopener" target="_blank">UAC</a> — undergraduate admissions centre (NSW &amp; more)</li>
-    </ul>
-    <p class="muted">Planning note: “MD” naming varies by school. Check bond / return-of-service rules and whether the degree supports your long-term practice goals in the US or elsewhere (separate licensing).</p>
-    <h2>United Kingdom (short)</h2>
-    <ul>
-      <li>Apply mainly through <a href="https://www.ucas.com/" rel="noopener" target="_blank">UCAS</a>.</li>
-      <li>Medicine overview: <a href="https://www.medschools.ac.uk/" rel="noopener" target="_blank">Medical Schools Council</a>.</li>
-      <li>Expect admissions tests (e.g. UCAT where required), predicted grades, and interviews. Confirm each school’s international rules.</li>
-    </ul>
-    <h2>Canada (short)</h2>
-    <ul>
-      <li>Most MD seats prioritize Canadian residents/citizens. International seats are limited — verify per school.</li>
-      <li>National info: <a href="https://www.afmc.ca/" rel="noopener" target="_blank">AFMC</a>.</li>
-      <li>Ontario applications often use <a href="https://www.ouac.on.ca/omsas/" rel="noopener" target="_blank">OMSAS</a>.</li>
-    </ul>
-    <h2>Ireland (short)</h2>
-    <ul>
-      <li>Undergraduate applications often go through <a href="https://www.cao.ie/" rel="noopener" target="_blank">CAO</a>.</li>
-      <li>Graduate-entry and EU/non-EU rules differ by university — read each medicine faculty page.</li>
-      <li>Example starting points: University College Dublin, Trinity College Dublin, University of Galway medicine pages (search the official university site).</li>
-    </ul>
-    <h2>How to use this with a CA plan</h2>
-    <ol>
-      <li>Keep a strong CA primary plan (UC/CSU/CCC + TAG backup).</li>
-      <li>Treat international medicine as a parallel research track, not a replacement for FAFSA / UC deadlines.</li>
-      <li>Compare total length, cost, English tests, and whether you hope to practice in the US later (USMLE / state licensing is a separate path).</li>
-    </ol>
-    <p class="muted">No admit rates invented on this page. Not visa advice. Verify every requirement on the official university site for your entry year.</p>
   </article>
+
+  <div class="country-grid" id="countryGrid">
+
+    <!-- 1. Australia -->
+    <section class="card" data-country="australia" aria-labelledby="au-title">
+      <div class="card-head">
+        <h2 id="au-title">Australia</h2>
+        <span class="badge likely">Likely path</span>
+        <p class="fit">Best overall fit for many CA students: clear undergrad &amp; graduate medicine routes, English-speaking, and published international portals.</p>
+      </div>
+      <dl class="meta-box">
+        <dt>Admission timeline</dt>
+        <dd>Example Adelaide 2026 cycle: UCAT ANZ Mar–Jun → apps Apr–Jun → interviews autumn → offers mid-Oct–Feb. Other schools similar but dates differ. <span class="conf">Confidence: medium</span></dd>
+        <dt>Intl tuition band (clinical / med programs)</dt>
+        <dd>AUD ~70k–110k+/yr for many undergrad clinical programs (examples: UNSW med ~AUD 95.5k first year; Adelaide Medical Studies ~AUD 103k/yr 2026; some MD sessions lower). Confirm on school site. <span class="conf">Confidence: medium</span></dd>
+      </dl>
+      <div class="chips" role="tablist" aria-label="Australia career tracks">
+        <button type="button" class="chip" role="tab" aria-pressed="true" data-track="doctor">Doctor</button>
+        <button type="button" class="chip" role="tab" aria-pressed="false" data-track="nurse">Nurse</button>
+        <button type="button" class="chip" role="tab" aria-pressed="false" data-track="specialist">Other specialist</button>
+        <button type="button" class="chip" role="tab" aria-pressed="false" data-track="science">Science</button>
+        <button type="button" class="chip" role="tab" aria-pressed="false" data-track="sci-biz">Science + Business</button>
+      </div>
+      <div class="track-panel active" data-panel="doctor">
+        <h3>Doctor (MD / MBBS)</h3>
+        <ol>
+          <li>Finish CA HS with strong science (Chem, Bio, Physics if you can) + English.</li>
+          <li><b>Undergrad-entry:</b> UCAT ANZ or ISAT + high ATAR-equivalent grades + interview → 5–6 year medicine.</li>
+          <li><b>Graduate-entry:</b> finish a bachelor’s → GAMSAT or MCAT + GPA + interview → ~4 year MD.</li>
+          <li>Apply via university portals / UAC (undergrad) or GEMSAS (many graduate schools).</li>
+          <li>After graduation: internship / residency in Australia or check US licensing (USMLE) if you want to practice in the US later.</li>
+        </ol>
+      </div>
+      <div class="track-panel" data-panel="nurse">
+        <h3>Nurse</h3>
+        <ol>
+          <li>CA HS → apply to Bachelor of Nursing (often 3 years) at an Australian university.</li>
+          <li>Meet English + academic thresholds; some schools want science subjects.</li>
+          <li>Complete clinical placements during the degree.</li>
+          <li>Register with AHPRA (nursing board) to work in Australia.</li>
+          <li>If returning to the US: research state board / NCLEX pathways separately.</li>
+        </ol>
+      </div>
+      <div class="track-panel" data-panel="specialist">
+        <h3>Other specialist (allied health)</h3>
+        <ol>
+          <li>Australia has strong allied-health degrees (physiotherapy, occupational therapy, paramedicine) — closer to “PA-like” clinical roles than a US PA program.</li>
+          <li>HS → 3–4 year bachelor in the allied field (check English + science prereqs).</li>
+          <li>Clinical placements are built into the degree.</li>
+          <li>Register with the relevant Australian board to practice locally.</li>
+          <li>US practice later needs a separate credential check — not automatic.</li>
+        </ol>
+      </div>
+      <div class="track-panel" data-panel="science">
+        <h3>Science</h3>
+        <ol>
+          <li>HS → Bachelor of Science / Biomedical Science (typically 3 years).</li>
+          <li>Use UAC or direct university international applications.</li>
+          <li>Optional Honours year for research depth.</li>
+          <li>Can feed into graduate medicine (GAMSAT/MCAT) or research careers.</li>
+          <li>Confirm lab / English requirements on each school site.</li>
+        </ol>
+      </div>
+      <div class="track-panel" data-panel="sci-biz">
+        <h3>Science + Business</h3>
+        <ol>
+          <li>Look for combined BSc / Bachelor of Commerce or dual degrees (often 4 years).</li>
+          <li>Keep science electives if you might switch to med or health later.</li>
+          <li>Internships via university career services.</li>
+          <li>Graduate work in biotech, consulting, or health admin — or pivot to GAMSAT route.</li>
+          <li>Confirm international fees per faculty (business vs science can differ).</li>
+        </ol>
+      </div>
+      <div class="links">
+        <a href="https://ucat.edu.au/" rel="noopener noreferrer" target="_blank">UCAT ANZ</a>
+        <a href="https://gemsas.edu.au/" rel="noopener noreferrer" target="_blank">GEMSAS</a>
+        <a href="https://www.studyaustralia.gov.au/" rel="noopener noreferrer" target="_blank">Study Australia</a>
+        <a href="https://medicaldeans.org.au/" rel="noopener noreferrer" target="_blank">Medical Deans</a>
+        <span class="map-pin"><a href="https://www.google.com/maps/search/?api=1&amp;query=University+of+Sydney+Camperdown" rel="noopener noreferrer" target="_blank">📍 Sydney · map</a></span>
+      </div>
+    </section>
+
+    <!-- 2. United Kingdom -->
+    <section class="card" data-country="uk" aria-labelledby="uk-title">
+      <div class="card-head">
+        <h2 id="uk-title">United Kingdom</h2>
+        <span class="badge competitive">Competitive</span>
+        <p class="fit">Clear UCAS process and UCAT pathway; medicine is competitive for internationals but well documented.</p>
+      </div>
+      <dl class="meta-box">
+        <dt>Admission timeline</dt>
+        <dd>UCAS medicine deadline ~15 Oct for next entry year; sit UCAT in summer before; MMI interviews autumn/winter; 5–6 year courses. <span class="conf">Confidence: medium–high on dates</span></dd>
+        <dt>Intl tuition band</dt>
+        <dd>Roughly £30k–£70k+/yr (clinical years often higher). Total over the degree often ~£230k–£420k. Confirm on school site. <span class="conf">Confidence: medium</span></dd>
+      </dl>
+      <div class="chips" role="tablist" aria-label="UK career tracks">
+        <button type="button" class="chip" role="tab" aria-pressed="true" data-track="doctor">Doctor</button>
+        <button type="button" class="chip" role="tab" aria-pressed="false" data-track="nurse">Nurse</button>
+        <button type="button" class="chip" role="tab" aria-pressed="false" data-track="specialist">Other specialist</button>
+        <button type="button" class="chip" role="tab" aria-pressed="false" data-track="science">Science</button>
+        <button type="button" class="chip" role="tab" aria-pressed="false" data-track="sci-biz">Science + Business</button>
+      </div>
+      <div class="track-panel active" data-panel="doctor">
+        <h3>Doctor (MBBS / MBChB)</h3>
+        <ol>
+          <li>Strong CA HS transcript + predicted grades; many schools want Chem + Bio (or Physics).</li>
+          <li>Sit UCAT in the summer; apply via UCAS by ~15 October.</li>
+          <li>MMI / panel interviews; offers often conditional on final grades.</li>
+          <li>5–6 year medicine program as an international fee-payer.</li>
+          <li>Foundation training in the UK or plan USMLE / ECFMG if aiming for the US.</li>
+        </ol>
+      </div>
+      <div class="track-panel" data-panel="nurse">
+        <h3>Nurse</h3>
+        <ol>
+          <li>UCAS apply to BSc Nursing (adult, child, mental health, etc.).</li>
+          <li>Meet English + GCSE/A-level equivalents; some interviews.</li>
+          <li>Degree includes NHS clinical placements (~3 years).</li>
+          <li>Register with the NMC to work in the UK.</li>
+          <li>US return path = separate state-board research.</li>
+        </ol>
+      </div>
+      <div class="track-panel" data-panel="specialist">
+        <h3>Other specialist (PA-like / allied)</h3>
+        <ol>
+          <li>UK has Physician Associate (postgrad) plus physio, OT, and paramedic degrees.</li>
+          <li>HS → relevant bachelor, or science bachelor → PA MSc where offered.</li>
+          <li>Clinical hours are required; check GMC / HCPC registration routes.</li>
+          <li>PA roles are not identical to US PAs — read role scope carefully.</li>
+          <li>Confirm each university’s international entry rules.</li>
+        </ol>
+      </div>
+      <div class="track-panel" data-panel="science">
+        <h3>Science</h3>
+        <ol>
+          <li>UCAS → BSc Biology, Biomedical Science, Chemistry, etc. (usually 3 years; Scotland often 4).</li>
+          <li>No single medicine test unless you later apply to graduate medicine.</li>
+          <li>Optional integrated master’s (MSci) at some schools.</li>
+          <li>Can lead to UK graduate-entry medicine or research / industry jobs.</li>
+          <li>Check visa &amp; CAS letter steps with the university international office.</li>
+        </ol>
+      </div>
+      <div class="track-panel" data-panel="sci-biz">
+        <h3>Science + Business</h3>
+        <ol>
+          <li>Joint honours or “with Management” degrees via UCAS.</li>
+          <li>Keep STEM modules if med or biotech is still a backup.</li>
+          <li>Sandwich year / placement options at many unis.</li>
+          <li>Graduate into consulting, biotech ops, or further study.</li>
+          <li>Fees vary by faculty — confirm both science and business rates.</li>
+        </ol>
+      </div>
+      <div class="links">
+        <a href="https://www.ucas.com/" rel="noopener noreferrer" target="_blank">UCAS</a>
+        <a href="https://www.ucat.ac.uk/" rel="noopener noreferrer" target="_blank">UCAT</a>
+        <a href="https://www.medschools.ac.uk/" rel="noopener noreferrer" target="_blank">Medical Schools Council</a>
+        <span class="map-pin"><a href="https://www.google.com/maps/search/?api=1&amp;query=University+College+London" rel="noopener noreferrer" target="_blank">📍 London · map</a></span>
+      </div>
+    </section>
+
+    <!-- 3. Ireland -->
+    <section class="card" data-country="ireland" aria-labelledby="ie-title">
+      <div class="card-head">
+        <h2 id="ie-title">Ireland</h2>
+        <span class="badge competitive">Competitive</span>
+        <p class="fit">Atlantic Bridge makes applying from the US/Canada simpler (one packet, multiple schools). Non-EU fees are high but pathways are clear.</p>
+      </div>
+      <dl class="meta-box">
+        <dt>Admission timeline</dt>
+        <dd>Atlantic Bridge for US/Canada: first-round docs often ~15 Dec; many apps close ~31 Jan (for next entry). Interviews winter/spring. Direct CAO routes differ for EU. <span class="conf">Confidence: medium</span></dd>
+        <dt>Intl tuition band (medicine)</dt>
+        <dd>Non-EU medicine often ~€55k–€61k/yr (planning band). Confirm on RCSI / TCD / school fee pages. <span class="conf">Confidence: medium</span></dd>
+      </dl>
+      <div class="chips" role="tablist" aria-label="Ireland career tracks">
+        <button type="button" class="chip" role="tab" aria-pressed="true" data-track="doctor">Doctor</button>
+        <button type="button" class="chip" role="tab" aria-pressed="false" data-track="nurse">Nurse</button>
+        <button type="button" class="chip" role="tab" aria-pressed="false" data-track="specialist">Other specialist</button>
+        <button type="button" class="chip" role="tab" aria-pressed="false" data-track="science">Science</button>
+        <button type="button" class="chip" role="tab" aria-pressed="false" data-track="sci-biz">Science + Business</button>
+      </div>
+      <div class="track-panel active" data-panel="doctor">
+        <h3>Doctor (MB / BCh / BAO)</h3>
+        <ol>
+          <li>CA HS or bachelor’s — Atlantic Bridge routes you to 5–6 year or 4-year graduate-entry programs.</li>
+          <li>Graduate-entry usually needs MCAT or GAMSAT + bachelor’s by entry year.</li>
+          <li>Submit one Atlantic Bridge application covering multiple Irish med schools.</li>
+          <li>Interviews / assessments (school-dependent; RCSI may use Casper for some routes).</li>
+          <li>Irish degrees are widely recognized; US practice still needs USMLE / state licensing.</li>
+        </ol>
+      </div>
+      <div class="track-panel" data-panel="nurse">
+        <h3>Nurse</h3>
+        <ol>
+          <li>Apply to BSc Nursing via CAO (EU rules) or university international admissions (non-EU).</li>
+          <li>Clinical placements with Irish hospitals during the degree.</li>
+          <li>Register with NMBI to practice in Ireland.</li>
+          <li>Fees and seats for non-EU nursing vary — check each school.</li>
+          <li>US return = separate board process.</li>
+        </ol>
+      </div>
+      <div class="track-panel" data-panel="specialist">
+        <h3>Other specialist (allied health)</h3>
+        <ol>
+          <li>Physiotherapy, pharmacy, and related programs are available via Atlantic Bridge or direct uni apps.</li>
+          <li>HS or undergrad → 3–4 year professional bachelor (or longer for pharmacy).</li>
+          <li>Clinical placements required.</li>
+          <li>Register with the Irish professional body for local practice.</li>
+          <li>Confirm non-EU fee bands on the official faculty page.</li>
+        </ol>
+      </div>
+      <div class="track-panel" data-panel="science">
+        <h3>Science</h3>
+        <ol>
+          <li>CAO or direct international apply to science / biomedical degrees at TCD, UCD, etc.</li>
+          <li>Typically 3–4 years; strong lab focus.</li>
+          <li>Can feed graduate-entry medicine later.</li>
+          <li>Research opportunities via summer programs.</li>
+          <li>Confirm English proof and leaving-cert equivalents.</li>
+        </ol>
+      </div>
+      <div class="track-panel" data-panel="sci-biz">
+        <h3>Science + Business</h3>
+        <ol>
+          <li>Look for joint science–business or commerce + STEM modules.</li>
+          <li>Dublin universities often publish combined options — read course catalogues.</li>
+          <li>Internships in pharma / medtech hubs around Dublin / Cork.</li>
+          <li>Keep GPA strong if graduate medicine is a backup.</li>
+          <li>Non-EU fees differ by faculty — confirm yearly.</li>
+        </ol>
+      </div>
+      <div class="links">
+        <a href="https://www.atlanticbridge.com/medicine/" rel="noopener noreferrer" target="_blank">Atlantic Bridge</a>
+        <a href="https://www.rcsi.com/" rel="noopener noreferrer" target="_blank">RCSI</a>
+        <a href="https://www.tcd.ie/medicine/" rel="noopener noreferrer" target="_blank">TCD Medicine</a>
+        <a href="https://www.cao.ie/" rel="noopener noreferrer" target="_blank">CAO</a>
+        <span class="map-pin"><a href="https://www.google.com/maps/search/?api=1&amp;query=Trinity+College+Dublin" rel="noopener noreferrer" target="_blank">📍 Dublin · map</a></span>
+      </div>
+    </section>
+
+    <!-- 4. Canada -->
+    <section class="card" data-country="canada" aria-labelledby="ca-title">
+      <div class="card-head">
+        <h2 id="ca-title">Canada</h2>
+        <span class="badge selective">Very selective</span>
+        <p class="fit">Close culturally, but international MD seats are scarce. Nursing and undergrad science are more realistic entry points for CA students.</p>
+      </div>
+      <dl class="meta-box">
+        <dt>Admission timeline</dt>
+        <dd>Provincial systems differ. Ontario MD often via OMSAS (fall apps for next fall). Undergrad apps: OUAC / direct university portals (winter–spring). <span class="conf">Confidence: medium on process; low on seat odds</span></dd>
+        <dt>Intl tuition band</dt>
+        <dd>Varies widely by province and program — undergrad intl often high five figures CAD; MD intl seats rare and expensive. Give qualitative ranges only; <b>check the university</b>. <span class="conf">Confidence: low on exact numbers</span></dd>
+      </dl>
+      <div class="chips" role="tablist" aria-label="Canada career tracks">
+        <button type="button" class="chip" role="tab" aria-pressed="true" data-track="doctor">Doctor</button>
+        <button type="button" class="chip" role="tab" aria-pressed="false" data-track="nurse">Nurse</button>
+        <button type="button" class="chip" role="tab" aria-pressed="false" data-track="specialist">Other specialist</button>
+        <button type="button" class="chip" role="tab" aria-pressed="false" data-track="science">Science</button>
+        <button type="button" class="chip" role="tab" aria-pressed="false" data-track="sci-biz">Science + Business</button>
+      </div>
+      <div class="track-panel active" data-panel="doctor">
+        <h3>Doctor (MD)</h3>
+        <ol>
+          <li>Most Canadian MD seats prioritize Canadian citizens / permanent residents.</li>
+          <li>Common path for internationals: undergrad science in Canada (or US) → apply MD where intl seats exist (very few).</li>
+          <li>MCAT + GPA + CASPer (many schools) + interviews.</li>
+          <li>AFMC and each faculty of medicine publish who may apply.</li>
+          <li>Do not count on an intl MD seat — keep a US / CA backup plan.</li>
+        </ol>
+      </div>
+      <div class="track-panel" data-panel="nurse">
+        <h3>Nurse</h3>
+        <ol>
+          <li>More accessible than MD for internationals at many universities.</li>
+          <li>HS → Bachelor of Science in Nursing (usually 4 years) via OUAC or direct apply.</li>
+          <li>Clinical placements in provincial health systems.</li>
+          <li>Register with the provincial nursing college to work.</li>
+          <li>Confirm intl tuition and seat limits on each campus site.</li>
+        </ol>
+      </div>
+      <div class="track-panel" data-panel="specialist">
+        <h3>Other specialist (PA / allied)</h3>
+        <ol>
+          <li>Physician Assistant programs exist in Canada but are limited and often resident-focused.</li>
+          <li>Physio, OT, and pharmacy are stronger undergrad/grad options at many unis.</li>
+          <li>Check residency requirements carefully before applying.</li>
+          <li>Clinical hours + provincial licensing after graduation.</li>
+          <li>US practice later needs separate credential evaluation.</li>
+        </ol>
+      </div>
+      <div class="track-panel" data-panel="science">
+        <h3>Science</h3>
+        <ol>
+          <li>Strong path: CA HS → Canadian BSc (life sciences, biomed).</li>
+          <li>Apply OUAC (Ontario) or provincial / direct portals.</li>
+          <li>Use the degree to re-apply for MD (Canada or US) or research / industry.</li>
+          <li>Co-op programs add paid work experience.</li>
+          <li>Intl undergrad tuition — confirm per university; confidence low without citing a campus.</li>
+        </ol>
+      </div>
+      <div class="track-panel" data-panel="sci-biz">
+        <h3>Science + Business</h3>
+        <ol>
+          <li>Many Canadian unis offer combined science–commerce or management minors.</li>
+          <li>Co-op is a big plus for biotech / consulting.</li>
+          <li>Keep med prerequisites if MD is still a goal.</li>
+          <li>Graduate work in Canada may need a separate work permit path (not covered here).</li>
+          <li>Always verify fees on the faculty finance page.</li>
+        </ol>
+      </div>
+      <div class="links">
+        <a href="https://www.afmc.ca/" rel="noopener noreferrer" target="_blank">AFMC</a>
+        <a href="https://www.ouac.on.ca/omsas/" rel="noopener noreferrer" target="_blank">OMSAS</a>
+        <a href="https://www.ouac.on.ca/" rel="noopener noreferrer" target="_blank">OUAC</a>
+        <span class="map-pin"><a href="https://www.google.com/maps/search/?api=1&amp;query=University+of+Toronto+St+George" rel="noopener noreferrer" target="_blank">📍 Toronto · map</a></span>
+      </div>
+    </section>
+
+    <!-- 5. Singapore -->
+    <section class="card" data-country="singapore" aria-labelledby="sg-title">
+      <div class="card-head">
+        <h2 id="sg-title">Singapore</h2>
+        <span class="badge selective">Very selective</span>
+        <p class="fit">World-class schools and clear portals, but medicine is highly selective for internationals and often comes with service-bond expectations.</p>
+      </div>
+      <dl class="meta-box">
+        <dt>Admission timeline (NUS Medicine example)</dt>
+        <dd>Intl apps ~3 Dec 2025–23 Feb 2026 for AY2026/27; Chem + Bio/Physics; UCAT or SAT/ACT+AP for many intl quals; FSA in April; ~280 places total. <span class="conf">Confidence: medium</span></dd>
+        <dt>Intl tuition band</dt>
+        <dd>NUS international medicine is often cited as high (e.g. figures around S$87,800/yr appear in planning discussions) with grant / bond complexity — <b>do not overclaim</b>; use the official fees page. Intl graduates may face an ~6-year MOH bond. <span class="conf">Confidence: medium/low</span></dd>
+      </dl>
+      <div class="chips" role="tablist" aria-label="Singapore career tracks">
+        <button type="button" class="chip" role="tab" aria-pressed="true" data-track="doctor">Doctor</button>
+        <button type="button" class="chip" role="tab" aria-pressed="false" data-track="nurse">Nurse</button>
+        <button type="button" class="chip" role="tab" aria-pressed="false" data-track="specialist">Other specialist</button>
+        <button type="button" class="chip" role="tab" aria-pressed="false" data-track="science">Science</button>
+        <button type="button" class="chip" role="tab" aria-pressed="false" data-track="sci-biz">Science + Business</button>
+      </div>
+      <div class="track-panel active" data-panel="doctor">
+        <h3>Doctor (MBBS / MD)</h3>
+        <ol>
+          <li>Strong Chem + Bio/Physics and top academics; check diploma type (US HS, IB, A-levels).</li>
+          <li>NUS: apply in the Dec–Feb window; UCAT or SAT/ACT+AP as published for your qual type.</li>
+          <li>Focusing Skills Assessment (FSA) / interviews for shortlisted applicants.</li>
+          <li>Very limited places; internationals may have bond / return-of-service rules (~6 years MOH for some paths).</li>
+          <li>Alternatives: NTU LKCMedicine; Duke-NUS (graduate-entry MD).</li>
+        </ol>
+      </div>
+      <div class="track-panel" data-panel="nurse">
+        <h3>Nurse</h3>
+        <ol>
+          <li>Nursing degrees via NUS / SIT / polytechnic pathways — check which accept internationals.</li>
+          <li>HS science + English requirements.</li>
+          <li>Clinical training in Singapore hospitals.</li>
+          <li>Local registration required to practice.</li>
+          <li>Confirm fees and bond rules on official pages.</li>
+        </ol>
+      </div>
+      <div class="track-panel" data-panel="specialist">
+        <h3>Other specialist (allied health)</h3>
+        <ol>
+          <li>Allied health and pharmacy programs exist at Singapore universities / SIT.</li>
+          <li>HS → professional bachelor with clinical modules.</li>
+          <li>Selectivity still high for internationals.</li>
+          <li>Local licensing boards apply after graduation.</li>
+          <li>Read each school’s international admissions FAQ carefully.</li>
+        </ol>
+      </div>
+      <div class="track-panel" data-panel="science">
+        <h3>Science</h3>
+        <ol>
+          <li>NUS / NTU Science or Life Sciences — competitive but clearer than medicine for some intl applicants.</li>
+          <li>Apply via NUS OAM / NTU admissions in the published window.</li>
+          <li>Strong math + science background expected.</li>
+          <li>Can lead to research, biotech, or later med school (local or abroad).</li>
+          <li>Confirm tuition on the official fees schedule.</li>
+        </ol>
+      </div>
+      <div class="track-panel" data-panel="sci-biz">
+        <h3>Science + Business</h3>
+        <ol>
+          <li>NUS offers double-degree / multidisciplinary options (science + business-related).</li>
+          <li>Apply through OAM; meet both faculty criteria.</li>
+          <li>Internships in Singapore’s biotech / finance hubs.</li>
+          <li>Useful if you want industry flexibility with a STEM base.</li>
+          <li>Fees: cite only from the official NUS fees page for your entry year.</li>
+        </ol>
+      </div>
+      <div class="links">
+        <a href="https://www.nus.edu.sg/oam/" rel="noopener noreferrer" target="_blank">NUS OAM</a>
+        <a href="https://medicine.nus.edu.sg/" rel="noopener noreferrer" target="_blank">NUS Medicine</a>
+        <a href="https://www.nus.edu.sg/registrar/administrative-policies-procedures/graduate/graduate-fees" rel="noopener noreferrer" target="_blank">NUS fees (check)</a>
+        <a href="https://www.duke-nus.edu.sg/" rel="noopener noreferrer" target="_blank">Duke-NUS</a>
+        <span class="map-pin"><a href="https://www.google.com/maps/search/?api=1&amp;query=National+University+of+Singapore" rel="noopener noreferrer" target="_blank">📍 Singapore · map</a></span>
+      </div>
+    </section>
+
+  </div>
+
+  <p class="muted" style="margin:8px 0 0">Planning notes only · not visa or immigration advice · confirm fees and dates yearly · retrieved ~2026-09-13 · no invented admit rates.</p>
 </main>
 <footer class="site-footer">
   <nav aria-label="More pages">
@@ -134,5 +550,22 @@ li{margin:6px 0}
   <div>Planning tool · not official admissions advice<br>
   Always confirm deadlines and major rules on campus sites.</div>
 </footer>
+<script>
+(function () {
+  document.querySelectorAll('.card').forEach(function (card) {
+    var chips = card.querySelectorAll('.chip');
+    var panels = card.querySelectorAll('.track-panel');
+    chips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        var track = chip.getAttribute('data-track');
+        chips.forEach(function (c) { c.setAttribute('aria-pressed', c === chip ? 'true' : 'false'); });
+        panels.forEach(function (p) {
+          p.classList.toggle('active', p.getAttribute('data-panel') === track);
+        });
+      });
+    });
+  });
+})();
+</script>
 </body>
 </html>
