@@ -53,7 +53,16 @@ li{margin:6px 0}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:var(--tap);padding:10px 16px;border-radius:var(--radius-sm);background:var(--accent);color:#fff!important;font-weight:650;text-decoration:none;border:none}
 .btn.ghost{background:var(--surface);color:var(--ink)!important;border:1.5px solid var(--line-strong)}
 .btn.ghost:hover{border-color:var(--accent);color:var(--accent)!important}
+.btn.lg{min-height:52px;padding:14px 18px;font-size:1.02rem;width:100%;max-width:420px}
 .muted{color:var(--muted);font-size:.88rem}
+.live-news{border:1.5px solid var(--accent);border-radius:var(--radius);padding:16px;margin:16px 0;background:linear-gradient(180deg,var(--accent-soft) 0%,#fff 48%)}
+.live-news h2{margin:0 0 8px;font-size:1.12rem;color:var(--accent);letter-spacing:-.015em}
+.live-news .lead{margin-bottom:10px}
+.news-frame-wrap{position:relative;border:1px solid var(--line);border-radius:var(--radius-sm);overflow:hidden;background:#fff;min-height:320px;margin:12px 0}
+.news-frame-wrap iframe{display:block;width:100%;height:min(62vh,560px);min-height:320px;border:0;background:#fafbfc}
+.fallback-card{border:1px dashed var(--line-strong);border-radius:var(--radius-sm);padding:16px;margin:12px 0;background:#fafbfc}
+.fallback-card strong{display:block;margin:0 0 8px;font-size:1rem}
+.fallback-card p{margin:0 0 12px;color:var(--muted);font-size:.92rem}
 .site-footer{text-align:center;color:var(--muted);font-size:.82rem;padding:24px 16px 36px;line-height:1.55;max-width:var(--wrap);margin:0 auto}
 .site-footer nav{display:flex;flex-wrap:wrap;gap:8px 14px;justify-content:center;margin-bottom:12px}
 .site-footer nav a{color:var(--accent);font-weight:650;text-decoration:none}
@@ -67,50 +76,73 @@ li{margin:6px 0}
 <main class="wrap">
   <header class="hero">
     <h1 class="brand"><a href="index.html">CA College Path Explorer</a></h1>
-    <p class="pitch">Curated CA admissions links · updated 2026-09-13</p>
+    <p class="pitch">Curated CA admissions links · refreshed with site updates · 2026-09-13</p>
   </header>
   <a class="back-link" href="index.html">← Back to explorer</a>
   <article class="panel">
     <h1>CA admissions headlines</h1>
-    <p class="lead">Curated official links for California college admissions. Static list — not a live scrape. <b>updated_on 2026-09-13</b>.</p>
+    <p class="lead">Curated official links for California college admissions. Static list — not a live scrape. <b>updated_on 2026-09-13</b> · refreshed with site updates.</p>
     <div class="note">
-      This page mixes hand-picked official pages with Google News search buttons.
+      This page mixes hand-picked official pages with a Live Google News attempt below.
       Headlines change; always open the source and check the date.
     </div>
-    <h2>Curated links</h2>
+
+    <section class="live-news" aria-labelledby="liveNewsHeading">
+      <h2 id="liveNewsHeading">Live Google News</h2>
+      <p class="lead">Filtered search for current CA / UC / CSU college admissions (incl. fall 2027). Many browsers block Google News inside iframes.</p>
+      <p class="muted"><b>If the feed is blank below, Google blocked the embed — use Open live Google News.</b></p>
+      <div class="news-frame-wrap">
+        <iframe
+          title="Google News: California UC CSU college admissions"
+          src="https://news.google.com/search?q=California%20OR%20UC%20OR%20CSU%20college%20admissions%20OR%20%22fall%202027%22&amp;hl=en-US&amp;gl=US&amp;ceid=US:en"
+          loading="lazy"
+          referrerpolicy="no-referrer"
+          sandbox="allow-scripts allow-same-origin allow-popups allow-forms"></iframe>
+      </div>
+      <div class="fallback-card">
+        <strong>Embed restricted?</strong>
+        <p>If the box above is empty or shows an error, open the same filtered search in a new tab.</p>
+        <div class="btn-row">
+          <a class="btn lg" href="https://news.google.com/search?q=California%20OR%20UC%20OR%20CSU%20college%20admissions%20OR%20%22fall%202027%22&amp;hl=en-US&amp;gl=US&amp;ceid=US:en" rel="noopener noreferrer" target="_blank">Open live Google News</a>
+          <a class="btn ghost" href="https://news.google.com/search?q=US%20college%20admissions&amp;hl=en-US&amp;gl=US&amp;ceid=US:en" rel="noopener noreferrer" target="_blank">US-wide college admissions</a>
+        </div>
+      </div>
+    </section>
+
+    <h2>Curated CA headlines</h2>
     <div class="link-cards">
-      <a class="link-card" href="https://admission.universityofcalifornia.edu/" rel="noopener" target="_blank">
+      <a class="link-card" href="https://admission.universityofcalifornia.edu/" rel="noopener noreferrer" target="_blank">
         <p class="title">UC admissions portal</p>
         <p class="desc">Dates, requirements, freshman and transfer hubs for the University of California.</p>
       </a>
-      <a class="link-card" href="https://www.universityofcalifornia.edu/news/press-releases-and-statements/academic-senate-review-admissions" rel="noopener" target="_blank">
+      <a class="link-card" href="https://www.universityofcalifornia.edu/news/press-releases-and-statements/academic-senate-review-admissions" rel="noopener noreferrer" target="_blank">
         <p class="title">UC Senate SAT review FAQ</p>
         <p class="desc">Academic Senate review of admissions testing — official UC statement hub.</p>
       </a>
-      <a class="link-card" href="https://calmatters.org/education/higher-education/2026/07/uc-sat-california/" rel="noopener" target="_blank">
+      <a class="link-card" href="https://calmatters.org/education/higher-education/2026/07/uc-sat-california/" rel="noopener noreferrer" target="_blank">
         <p class="title">CalMatters: UC SAT review</p>
         <p class="desc">Independent CA reporting on the UC SAT / admissions testing review (July 2026).</p>
       </a>
-      <a class="link-card" href="https://www.calstate.edu/apply/pages/application-dates-deadlines.aspx" rel="noopener" target="_blank">
+      <a class="link-card" href="https://www.calstate.edu/apply/pages/application-dates-deadlines.aspx" rel="noopener noreferrer" target="_blank">
         <p class="title">CSU application dates</p>
         <p class="desc">Cal State Apply windows and deadlines — confirm before you submit.</p>
       </a>
-      <a class="link-card" href="https://admission.universityofcalifornia.edu/admission-requirements/transfer-requirements/uc-transfer-programs/dual-admission.html" rel="noopener" target="_blank">
+      <a class="link-card" href="https://admission.universityofcalifornia.edu/admission-requirements/transfer-requirements/uc-transfer-programs/dual-admission.html" rel="noopener noreferrer" target="_blank">
         <p class="title">UC Dual Admission</p>
         <p class="desc">CCC pathway details after some freshman outcomes; Pathways+ context.</p>
       </a>
-      <a class="link-card" href="https://admission.universityofcalifornia.edu/_assets/files/transfer-requirements/updated_202728-tag-matrix_ada.pdf" rel="noopener" target="_blank">
+      <a class="link-card" href="https://admission.universityofcalifornia.edu/_assets/files/transfer-requirements/updated_202728-tag-matrix_ada.pdf" rel="noopener noreferrer" target="_blank">
         <p class="title">TAG matrix PDF</p>
         <p class="desc">Campus and major TAG matrix (2027–28 planning file). Check exclusions every year.</p>
       </a>
     </div>
-    <h2>Google News searches</h2>
-    <p>Open a live search when you want fresher headlines. These buttons run Google News queries — the site does not scrape results.</p>
+    <h2>More Google News searches</h2>
+    <p>Quick buttons for related live queries. The site does not scrape results.</p>
     <div class="btn-row">
-      <a class="btn" href="https://news.google.com/search?q=California%20college%20admissions&amp;hl=en-US&amp;gl=US&amp;ceid=US%3Aen" rel="noopener" target="_blank">CA college admissions</a>
-      <a class="btn ghost" href="https://news.google.com/search?q=US%20college%20admissions&amp;hl=en-US&amp;gl=US&amp;ceid=US%3Aen" rel="noopener" target="_blank">US-wide college admissions</a>
+      <a class="btn" href="https://news.google.com/search?q=California%20college%20admissions&amp;hl=en-US&amp;gl=US&amp;ceid=US%3Aen" rel="noopener noreferrer" target="_blank">CA college admissions</a>
+      <a class="btn ghost" href="https://news.google.com/search?q=US%20college%20admissions&amp;hl=en-US&amp;gl=US&amp;ceid=US%3Aen" rel="noopener noreferrer" target="_blank">US-wide college admissions</a>
     </div>
-    <p class="muted">Static curated list + Google search buttons · no live scrape · updated_on 2026-09-13.</p>
+    <p class="muted">Static curated list + Live Google News attempt · no live scrape · refreshed with site updates · updated_on 2026-09-13.</p>
   </article>
 </main>
 <footer class="site-footer">
