@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f766e">
+<meta name="description" content="Health career pay targets: US averages vs California for physician specialties, PA, NP, and clinic ops — motivation without the greed spiral.">
+<title>Health career salaries · US + California</title>
+<style>
+:root{
+  --bg:#0b1220; --card:#121a2b; --ink:#e8eef7; --muted:#9aa8bc;
+  --accent:#2dd4bf; --accent2:#a78bfa; --line:#243044; --good:#34d399; --warn:#fbbf24;
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.55;font-size:17px}
+a{color:var(--accent)}
+.wrap{max-width:920px;margin:0 auto;padding:20px 16px 40px}
+.top{margin-bottom:18px}
+.back{color:var(--muted);text-decoration:none;font-weight:600;font-size:.9rem}
+.back:hover{color:var(--accent)}
+.hero{
+  background:linear-gradient(145deg,#142033 0%,#0f766e22 45%,#a78bfa18 100%);
+  border:1px solid var(--line);border-radius:20px;padding:28px 22px;margin-bottom:22px;
+}
+.kicker{font-size:.75rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.hero h1{font-size:clamp(1.55rem,4vw,2.1rem);line-height:1.15;margin:0 0 12px;letter-spacing:-.03em}
+.hero p{margin:0;color:var(--muted);font-size:1.05rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chip{background:#0b1220aa;border:1px solid var(--line);border-radius:999px;padding:8px 12px;font-size:.82rem;font-weight:700}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 16px;margin:14px 0}
+.card h2{margin:0 0 8px;font-size:1.15rem;letter-spacing:-.02em}
+.card h3{margin:14px 0 6px;font-size:.95rem;color:var(--accent)}
+.card p,.card li{color:#c5d0e0}
+.quote{border-left:3px solid var(--accent2);padding:4px 0 4px 14px;color:#d7def0;margin:12px 0;font-size:1.05rem}
+.tag{display:inline-block;font-size:.7rem;font-weight:800;padding:3px 8px;border-radius:999px;background:#0b1220;border:1px solid var(--line);color:var(--accent)}
+.cta{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:44px;padding:10px 16px;border-radius:12px;background:var(--accent);color:#042f2e!important;
+  font-weight:750;text-decoration:none;margin:8px 8px 0 0;
+}
+.cta.ghost{background:transparent;color:var(--accent)!important;border:1px solid var(--line)}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px -4px 0;padding:0 4px}
+table{width:100%;border-collapse:collapse;font-size:.88rem;min-width:560px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.04em;position:sticky;top:0;background:var(--card)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr:hover td{background:#0b122040}
+.hi td{background:#0f766e18}
+.note{font-size:.82rem;color:var(--muted);margin-top:10px}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.filters button{
+  border:1px solid var(--line);background:#0b1220;color:var(--ink);border-radius:999px;
+  padding:8px 14px;font-weight:700;font-size:.85rem;cursor:pointer;min-height:40px
+}
+.filters button.active{border-color:var(--accent);color:var(--accent);background:#0f766e22}
+.statgrid{display:grid;gap:10px;grid-template-columns:1fr 1fr;margin-top:12px}
+@media(min-width:700px){.statgrid{grid-template-columns:repeat(4,1fr)}}
+.stat{background:#0b1220;border:1px solid var(--line);border-radius:14px;padding:12px}
+.stat b{display:block;font-size:1.15rem;letter-spacing:-.02em}
+.stat span{font-size:.75rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a class="back" href="index.html">← College Path Explorer</a></div>
+
+  <header class="hero">
+    <p class="kicker">Pay targets · not a personality</p>
+    <h1>See the levels. Then earn the skills.</h1>
+    <p>
+      Use these numbers as <strong>targets</strong> — reasons to protect GPA, grind MCAT stretches,
+      shadow seriously, and build systems skills. Specialty and role matter more than undergrad logos.
+      California often pays higher dollars; cost of living eats some of that. Plan for both.
+    </p>
+    <div class="chips">
+      <span class="chip">US averages</span>
+      <span class="chip">CA column</span>
+      <span class="chip">MD / DO specialties</span>
+      <span class="chip">PA · NP · ops</span>
+    </div>
+  </header>
+
+  <section class="card">
+    <h2>How to use this (Gen Z version)</h2>
+    <div class="quote">Money is a scoreboard for options — sleep, family, debt payoff, choosing your city. It’s not your whole story.</div>
+    <ul>
+      <li><strong>Pick a lane you’d still care about at 35</strong>, then notice what that lane usually pays.</li>
+      <li><strong>High pay usually means longer training + harder residency matches</strong> (surgery, etc.) — not a cheat code.</li>
+      <li><strong>CA dollars ≠ CA lifestyle automatically</strong> — rent and taxes hit hard in coastal metros.</li>
+      <li><strong>Primary care still builds real lives</strong> — especially if you want community impact and sane hours.</li>
+    </ul>
+    <p>
+      <a class="cta ghost" href="premed-playbook.html">Premed playbook</a>
+      <a class="cta ghost" href="med-business-playbook.html">Med + Business</a>
+      <a class="cta ghost" href="mcat-prep.html">MCAT practice</a>
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>Big picture snapshots</h2>
+    <div class="statgrid">
+      <div class="stat"><span>US physicians (avg)</span><b>$438k</b></div>
+      <div class="stat"><span>CA metros (sample)</span><b>~$449–485k</b></div>
+      <div class="stat"><span>US PA median</span><b>$141k</b></div>
+      <div class="stat"><span>CA PA median</span><b>$166k</b></div>
+    </div>
+    <p class="note">Physician averages: Doximity 2026 Physician Compensation Report (2025 survey data). PA/NP: BLS OEWS May 2025. Verify yearly.</p>
+  </section>
+
+  <section class="card">
+    <h2>California physician metros (overall)</h2>
+    <p>Doximity metro averages for <em>all physicians</em> in major CA markets (2025 data). Useful context for the CA column below.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Metro</th><th class="num">Avg compensation</th></tr></thead>
+        <tbody>
+          <tr><td>Sacramento, CA</td><td class="num">$484,817</td></tr>
+          <tr><td>Los Angeles, CA</td><td class="num">$469,047</td></tr>
+          <tr><td>San Francisco, CA</td><td class="num">$462,806</td></tr>
+          <tr><td>San Jose, CA</td><td class="num">$459,691</td></tr>
+          <tr><td>San Diego, CA</td><td class="num">$451,017</td></tr>
+          <tr><td>Riverside, CA</td><td class="num">$449,275</td></tr>
+          <tr class="hi"><td>US overall (all physicians)</td><td class="num">$438,269</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">CA metros in this sample sit roughly <strong>~3–11% above</strong> the US overall average. Specialty mix differs by city.</p>
+  </section>
+
+  <section class="card">
+    <h2>Physician specialties — US avg + CA estimate</h2>
+    <p>
+      <span class="tag">US</span> = Doximity specialty averages (2025 data / 2026 report).
+      <span class="tag">CA est.</span> = US × <strong>1.06</strong> (midpoint of the CA-metro vs US overall gap).
+      Not a specialty-specific CA survey — an orientation target for CA practice.
+    </p>
+    <div class="filters" id="specFilters" role="group" aria-label="Filter specialties">
+      <button type="button" class="active" data-filter="all">All</button>
+      <button type="button" data-filter="top">Top pay</button>
+      <button type="button" data-filter="primary">Primary / peds</button>
+      <button type="button" data-filter="mid">Mid band</button>
+    </div>
+    <div class="scroll">
+      <table id="specTable">
+        <thead>
+          <tr>
+            <th>Specialty</th>
+            <th class="num">US avg</th>
+            <th class="num">CA est.</th>
+            <th>Lane</th>
+          </tr>
+        </thead>
+        <tbody id="specBody"></tbody>
+      </table>
+    </div>
+    <p class="note">Training length and lifestyle vary wildly. Neurosurgery pay ≠ neurosurgery weekends.</p>
+  </section>
+
+  <section class="card">
+    <h2>Other health careers — US vs California (BLS)</h2>
+    <p>Medians from BLS OEWS (May 2025). These are wages, not Doximity physician survey totals.</p>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th>Role</th><th class="num">US median</th><th class="num">CA median</th><th>Why it matters</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Physician assistants</td>
+            <td class="num">$141,280</td>
+            <td class="num">$165,650</td>
+            <td>Shorter pipeline than MD/DO for many; strong CA demand.</td>
+          </tr>
+          <tr>
+            <td>Nurse practitioners</td>
+            <td class="num">$132,300</td>
+            <td class="num">$168,520</td>
+            <td>CA leads NP pay nationally; path usually BSN → experience → NP.</td>
+          </tr>
+          <tr>
+            <td>Medical &amp; health services managers</td>
+            <td class="num">$140,970</td>
+            <td class="num">$141,480</td>
+            <td>Clinic ops / admin ladder. Means and top quartile run higher; seniority + setting matter.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Health tech / product / biotech pay varies by company stage — often closer to tech bands than clinical medians. Shadow real teams before chasing titles.</p>
+  </section>
+
+  <section class="card">
+    <h2>Turn numbers into a work plan</h2>
+    <ol>
+      <li><strong>Circle 2–3 target lanes</strong> (ex: ortho vs family med vs PA vs clinic ops).</li>
+      <li><strong>Map the training years</strong> — undergrad → (MCAT) → school → residency/grad program.</li>
+      <li><strong>List skills that unlock that lane</strong> — GPA floor, MCAT band, clinical hours, ops projects.</li>
+      <li><strong>Protect energy</strong> — high-pay lanes punish burnout before they pay.</li>
+    </ol>
+    <p>
+      <a class="cta" href="premed-playbook.html">Build the premed plan →</a>
+      <a class="cta ghost" href="med-business-playbook.html">Ops / health-tech plan →</a>
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>Sources (verify yearly)</h2>
+    <ul>
+      <li>Doximity <em>2026 Physician Compensation Report</em> (2025 survey) — US specialty averages + metro figures</li>
+      <li>U.S. BLS OEWS May 2025 — PA, NP, medical &amp; health services managers (US + CA)</li>
+      <li>CA specialty estimates on this page are <strong>derived</strong> (US × 1.06), not official specialty-by-state Doximity cells</li>
+    </ul>
+    <p class="note">Educational planning tool — not tax, contract, or career advice. Individual offers vary by setting, RVUs, partnership, and hours.</p>
+  </section>
+</div>
+<div id="site-footer-slot" data-extra="Pay figures for motivation and planning · verify sources yearly · not a promise of income"></div>
+<script>
+(function () {
+  const SPECS = [
+    { name: "Neurosurgery", us: 829161, lane: "top" },
+    { name: "Thoracic surgery", us: 749707, lane: "top" },
+    { name: "Orthopaedic surgery", us: 696852, lane: "top" },
+    { name: "Interventional radiology", us: 634658, lane: "top" },
+    { name: "Pediatric (general) surgery", us: 627126, lane: "top" },
+    { name: "Plastic surgery", us: 625757, lane: "top" },
+    { name: "Radiation oncology", us: 613837, lane: "top" },
+    { name: "Radiology", us: 609684, lane: "top" },
+    { name: "Cardiology", us: 604635, lane: "top" },
+    { name: "Vascular surgery", us: 600520, lane: "top" },
+    { name: "Urology", us: 566740, lane: "top" },
+    { name: "Anesthesiology", us: 557131, lane: "top" },
+    { name: "Otolaryngology (ENT)", us: 549810, lane: "mid" },
+    { name: "Gastroenterology", us: 531345, lane: "mid" },
+    { name: "Oncology", us: 519715, lane: "mid" },
+    { name: "General surgery", us: 501003, lane: "mid" },
+    { name: "Dermatology", us: 497509, lane: "mid" },
+    { name: "Colon & rectal surgery", us: 492802, lane: "mid" },
+    { name: "Ophthalmology", us: 487438, lane: "mid" },
+    { name: "Hematology", us: 446700, lane: "mid" },
+    { name: "Pulmonology", us: 441472, lane: "mid" },
+    { name: "Emergency medicine", us: 423723, lane: "mid" },
+    { name: "Obstetrics & gynecology", us: 420859, lane: "mid" },
+    { name: "Pathology", us: 410039, lane: "mid" },
+    { name: "Nephrology", us: 385965, lane: "mid" },
+    { name: "Physical medicine / rehab", us: 376234, lane: "mid" },
+    { name: "Neurology", us: 371087, lane: "mid" },
+    { name: "Psychiatry", us: 350786, lane: "mid" },
+    { name: "Internal medicine", us: 339274, lane: "primary" },
+    { name: "Family medicine", us: 325040, lane: "primary" },
+    { name: "Endocrinology", us: 309782, lane: "primary" },
+    { name: "Pediatrics", us: 273665, lane: "primary" },
+    { name: "Pediatric rheumatology", us: 236011, lane: "primary" },
+    { name: "Pediatric infectious disease", us: 217819, lane: "primary" }
+  ];
+  const CA_MULT = 1.06;
+  const money = (n) => "$" + Math.round(n).toLocaleString("en-US");
+  const body = document.getElementById("specBody");
+  let filter = "all";
+
+  function laneLabel(l) {
+    if (l === "top") return "High procedural / surgical";
+    if (l === "primary") return "Primary / peds-heavy";
+    return "Specialist mid band";
+  }
+
+  function render() {
+    body.innerHTML = "";
+    SPECS.filter((s) => filter === "all" || s.lane === filter || (filter === "top" && s.lane === "top"))
+      .forEach((s) => {
+        const tr = document.createElement("tr");
+        if (s.lane === "top") tr.className = "hi";
+        tr.dataset.lane = s.lane;
+        tr.innerHTML =
+          "<td>" + s.name + "</td>" +
+          '<td class="num">' + money(s.us) + "</td>" +
+          '<td class="num">' + money(s.us * CA_MULT) + "</td>" +
+          "<td>" + laneLabel(s.lane) + "</td>";
+        body.appendChild(tr);
+      });
+  }
+
+  document.querySelectorAll("#specFilters button").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll("#specFilters button").forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      filter = btn.getAttribute("data-filter");
+      render();
+    });
+  });
+  render();
+})();
+</script>
+<script src="footer.js"></script>
+</body>
+</html>

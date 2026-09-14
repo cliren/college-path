@@ -5,6 +5,7 @@
     { href: "premed-playbook.html", label: "Premed playbook" },
     { href: "mcat-prep.html", label: "MCAT prep" },
     { href: "med-business-playbook.html", label: "Med+Business" },
+    { href: "salaries.html", label: "Salaries" },
     { href: "parents.html", label: "Parents" },
     { href: "tag.html", label: "TAG" },
     { href: "news.html", label: "News" },

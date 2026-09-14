@@ -28,7 +28,8 @@ a{color:var(--accent)}
 .hero h1{font-size:clamp(1.6rem,4vw,2.15rem);line-height:1.15;margin:0 0 12px;letter-spacing:-.03em}
 .hero p{margin:0;color:var(--muted);font-size:1.05rem}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
-.chip{background:#0b1220aa;border:1px solid var(--line);border-radius:999px;padding:8px 12px;font-size:.82rem;font-weight:700;color:var(--ink)}
+.chip{background:#0b1220aa;border:1px solid var(--line);border-radius:999px;padding:8px 12px;font-size:.82rem;font-weight:700;color:var(--ink);text-decoration:none;display:inline-block}
+a.chip:hover{border-color:var(--accent);color:var(--accent)}
 .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 16px;margin:14px 0}
 .card h2{margin:0 0 8px;font-size:1.15rem;letter-spacing:-.02em}
 .card p,.card li{color:#c5d0e0}
@@ -77,14 +78,16 @@ th{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.
     <p>
       Medicine isn’t a vibe. It’s a long game: curiosity + skills + stamina.
       This page is the unglamorous map — paths after undergrad, GPA reality checks,
-      MCAT targets, and how to aim for med school without turning your whole personality into a LinkedIn thread.
+      <a href="mcat-prep.html">MCAT</a> targets, and how to aim for med school without turning your whole personality into a LinkedIn thread.
     </p>
     <div class="chips">
       <span class="chip">MD / DO</span>
       <span class="chip">PA / NP tracks</span>
       <span class="chip">GPA targets</span>
-      <span class="chip">MCAT game plan</span>
+      <a class="chip" href="mcat-prep.html">MCAT game plan →</a>
+      <a class="chip" href="med-business-playbook.html">Med + Business →</a>
       <span class="chip">Passion ≠ burnout</span>
+      <a class="chip" href="salaries.html">Salaries US+CA</a>
     </div>
   </header>
 
@@ -93,8 +96,8 @@ th{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.
     <div class="quote">Your undergrad brand doesn’t set your future paycheck. Your habits, skills, and specialty path do.</div>
     <ul>
       <li><strong>Get into a college you can thrive in</strong> — then protect your GPA and keep doing real clinical/service work.</li>
-      <li><strong>Med school averages (U.S. MD matriculants, 2025 entering class / AAMC):</strong> GPA ~<strong>3.81</strong>, MCAT ~<strong>512</strong>.</li>
-      <li><strong>Applicant averages are lower</strong> (GPA ~3.67, MCAT ~506) — so “average applicant” ≠ “average admitted.”</li>
+      <li><strong>Med school averages (U.S. MD matriculants, 2025 entering class / AAMC):</strong> GPA ~<strong>3.81</strong>, <a href="mcat-prep.html">MCAT</a> ~<strong>512</strong>.</li>
+      <li><strong>Applicant averages are lower</strong> (GPA ~3.67, <a href="mcat-prep.html">MCAT</a> ~506) — so “average applicant” ≠ “average admitted.”</li>
       <li>High-earning doctor roles usually come from <strong>specialty + practice setting</strong> later — not from undergrad flex.</li>
       <li>You can love helping people <em>and</em> build a stable life. Those aren’t opposite goals.</li>
     </ul>
@@ -105,7 +108,7 @@ th{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.
     <div class="path" aria-label="Career path steps">
       <div class="step"><b>Now</b><span>HS / early college</span></div><span class="arrow">→</span>
       <div class="step"><b>Undergrad</b><span>Prereqs + GPA + hours</span></div><span class="arrow">→</span>
-      <div class="step"><b>MCAT</b><span>Target + practice tests</span></div><span class="arrow">→</span>
+      <div class="step"><b><a href="mcat-prep.html" style="color:inherit;text-decoration:none">MCAT</a></b><span><a href="mcat-prep.html">Target + practice tests</a></span></div><span class="arrow">→</span>
       <div class="step"><b>Med school</b><span>MD or DO</span></div><span class="arrow">→</span>
       <div class="step"><b>Residency</b><span>Specialty training</span></div><span class="arrow">→</span>
       <div class="step"><b>Practice</b><span>Care + craft + life</span></div>
@@ -138,10 +141,11 @@ th{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.
           <li>Biotech / research translation</li>
           <li>Public health + policy</li>
         </ul>
-        <p>You don’t have to pick “pure prestige doctor” or “sell out.” Lots of people combine care + building better systems.</p>
+        <p>You don’t have to pick “pure prestige doctor” or “sell out.” Lots of people combine care + building better systems. → <a href="med-business-playbook.html"><strong>Med + Business playbook</strong></a></p>
         <p><a class="cta ghost" href="med-business-playbook.html">Med + Business playbook →</a></p>
         <h3>About money (without making it the whole plot)</h3>
-        <p>Survey data (e.g. Doximity physician compensation reports) shows surgical/procedural specialties often earn more than primary care on average. That’s info — not a personality test. Pick work you can do for decades.</p>
+        <p>Survey data (e.g. Doximity) shows surgical/procedural specialties often earn more than primary care on average. That’s a <strong>target map</strong> — not a personality test. Pick work you can do for decades.</p>
+        <p><a class="cta ghost" href="salaries.html">US + CA salary targets →</a></p>
       </div>
     </div>
   </section>
@@ -168,7 +172,7 @@ th{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.
   </section>
 
   <section class="card">
-    <h2>MCAT: how to prep + set a target</h2>
+    <h2 id="mcat"><a href="mcat-prep.html" style="color:inherit;text-decoration:none">MCAT</a>: how to prep + set a target · <a href="mcat-prep.html" style="font-size:.85rem;font-weight:700">full MCAT prep page →</a></h2>
     <p>The MCAT is scored roughly <strong>472–528</strong>. Sections: Chem/Phys, CARS, Bio/Biochem, Psych/Soc.</p>
     <table>
       <thead><tr><th>Target vibe</th><th>Total score (approx)</th><th>Notes</th></tr></thead>
@@ -207,6 +211,22 @@ th{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.
     </ul>
   </section>
 
+
+  <section class="card" id="salaries">
+    <h2>Pay targets (work hard toward a lane)</h2>
+    <div class="quote">See the levels. Then earn the skills — GPA, MCAT, clinical hours, recovery habits.</div>
+    <ul>
+      <li><strong>US physician average ~$438k</strong> (Doximity 2025 data) — specialty swings from ~$200k+ (some peds) to ~$800k+ (neurosurgery).</li>
+      <li><strong>CA metros often land ~$449–485k</strong> overall — higher dollars, higher rent.</li>
+      <li><strong>PA / NP</strong> medians: US ~$132–141k; CA often ~$166–169k (BLS).</li>
+      <li>Use the table to pick 2–3 lanes you’d still want at 35 — then reverse-engineer the training.</li>
+    </ul>
+    <p>
+      <a class="cta" href="salaries.html">Open full US + CA salaries table →</a>
+      <a class="cta ghost" href="med-business-playbook.html">Med + Business lanes</a>
+    </p>
+  </section>
+
   <section class="card">
     <h2>Inspiration without the toxic grind</h2>
     <div class="quote">You’re allowed to want a good life — sleep, friendships, family, art, sports — <em>and</em> still become excellent.</div>
@@ -223,9 +243,18 @@ th{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.
     <label><input type="checkbox"> Map prereqs for my target path (MD/DO/PA)</label>
     <label><input type="checkbox"> Set a term GPA goal I can actually defend</label>
     <label><input type="checkbox"> Book a weekly clinical / service block</label>
-    <label><input type="checkbox"> Take an MCAT diagnostic</label>
-    <label><input type="checkbox"> Pick floor + stretch MCAT targets</label>
+    <label><input type="checkbox"> Take an <a href="mcat-prep.html">MCAT diagnostic</a></label>
+    <label><input type="checkbox"> Pick floor + stretch <a href="mcat-prep.html">MCAT</a> targets</label>
     <label><input type="checkbox"> Talk to a pre-health advisor this month</label>
+  </section>
+
+
+  <section class="card">
+    <h2>Related playbooks</h2>
+    <div class="grid two">
+      <p><a href="mcat-prep.html"><strong>MCAT prep →</strong></a><br><span style="color:#c5d0e0">Diagnostic → content gaps → practice passages → AAMC full-lengths.</span></p>
+      <p><a href="med-business-playbook.html"><strong>Med + Business →</strong></a><br><span style="color:#c5d0e0">Clinic ops, health tech, biotech, policy, MD/MBA &amp; PA + entrepreneurship.</span></p>
+    </div>
   </section>
 
   <section class="card">
@@ -246,7 +275,6 @@ th{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.
   </p>
 </div>
 <div id="site-footer-slot"></div>
-<script src="footer.js"></script>
 <script>
   // Persist checklist locally in-browser only (no server). Optional quality-of-life.
   document.querySelectorAll('.checklist input').forEach((el, i) => {
@@ -255,5 +283,7 @@ th{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.
     el.addEventListener('change', () => localStorage.setItem(key, el.checked ? '1' : '0'));
   });
 </script>
+<div id="site-footer"></div>
+<script src="site-footer.js"></script>
 </body>
 </html>
