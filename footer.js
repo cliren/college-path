@@ -1,11 +1,13 @@
 /* Shared site footer for College Path secondary pages. */
 (function () {
   var LINKS = [
+    { href: "start-here.html", label: "Start here" },
     { href: "index.html", label: "Explorer" },
     { href: "premed-playbook.html", label: "Premed playbook" },
     { href: "mcat-prep.html", label: "MCAT prep" },
     { href: "med-business-playbook.html", label: "Med+Business" },
     { href: "salaries.html", label: "Salaries" },
+    { href: "rough-year.html", label: "Rough year" },
     { href: "parents.html", label: "Parents" },
     { href: "tag.html", label: "TAG" },
     { href: "news.html", label: "News" },

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f766e">
+<meta name="description" content="Generic guide for students whose grades dipped — rebound plan for college and premed paths. No personal stories.">
+<title>After a rough year · rebound guide</title>
+<style>
+:root{--bg:#0b1220;--card:#121a2b;--ink:#e8eef7;--muted:#9aa8bc;--accent:#2dd4bf;--accent2:#a78bfa;--line:#243044;--font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+*{box-sizing:border-box}body{margin:0;font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.55;font-size:17px}
+a{color:var(--accent)}.wrap{max-width:820px;margin:0 auto;padding:20px 16px 40px}
+.back{color:var(--muted);text-decoration:none;font-weight:600;font-size:.9rem}
+.hero{background:linear-gradient(145deg,#142033 0%,#0f766e22 45%,#a78bfa18 100%);border:1px solid var(--line);border-radius:20px;padding:28px 22px;margin:18px 0 22px}
+.kicker{font-size:.75rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+h1{font-size:clamp(1.55rem,4vw,2.1rem);line-height:1.15;margin:0 0 12px;letter-spacing:-.03em}
+.hero p{margin:0;color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 16px;margin:14px 0}
+.card h2{margin:0 0 8px;font-size:1.15rem}.card p,.card li{color:#c5d0e0}
+.quote{border-left:3px solid var(--accent2);padding:4px 0 4px 14px;color:#d7def0;margin:12px 0;font-size:1.05rem}
+.cta{display:inline-flex;align-items:center;min-height:44px;padding:10px 16px;border-radius:12px;background:var(--accent);color:#042f2e!important;font-weight:750;text-decoration:none;margin:8px 8px 0 0}
+.cta.ghost{background:transparent;color:var(--accent)!important;border:1px solid var(--line)}
+.checklist label{display:flex;gap:10px;align-items:flex-start;margin:8px 0;cursor:pointer}
+.checklist input{margin-top:4px;accent-color:var(--accent);width:18px;height:18px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="start-here.html">← Start here</a>
+  <header class="hero">
+    <p class="kicker">Rebound guide</p>
+    <h1>A rough year is a chapter — not your whole transcript.</h1>
+    <p>Illness, family stress, mental health, moving, COVID hangover — lots of students have a dip. Admissions readers look for the <strong>arc</strong>: what happened, what you did next, and whether the climb is real.</p>
+  </header>
+
+  <section class="card">
+    <h2>What this page is (and isn’t)</h2>
+    <div class="quote">No personal stories here. Just a plan pattern you can adapt.</div>
+    <ul>
+      <li>Not medical, legal, or admissions advice.</li>
+      <li>Not a promise that any school will admit you.</li>
+      <li>A practical rebound checklist for college lists + (if relevant) premed.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>For college applications</h2>
+    <ol>
+      <li><strong>Build a list with likely seats</strong> — not only logos. Use the <a href="index.html">Explorer</a> with an honest GPA lever.</li>
+      <li><strong>Explain once, clearly</strong> — additional info / counselor note if appropriate. Facts + growth, not a novel.</li>
+      <li><strong>Show the rebound in grades</strong> — next terms matter more than perfect excuses.</li>
+      <li><strong>Keep a parallel plan</strong> — CCC → <a href="tag.html">TAG</a> is a normal California path, not a failure lane.</li>
+    </ol>
+  </section>
+
+  <section class="card">
+    <h2>If you’re still aiming premed</h2>
+    <ul>
+      <li><strong>Undergrad is where many GPAs are rebuilt</strong> — pick a campus you can thrive in, not just flex.</li>
+      <li><strong>Science GPA trend</strong> upward beats one bad season forever.</li>
+      <li><strong>MCAT later</strong> can help rebalance a story — practice in short stretches: <a href="mcat-prep.html">MCAT prep</a>.</li>
+      <li><strong>Clinical hours + service</strong> still count — consistency over checkbox spam.</li>
+      <li>Read the full map: <a href="premed-playbook.html">Premed playbook</a> · <a href="salaries.html">pay targets</a>.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Support systems (use them)</h2>
+    <ul>
+      <li>School counselor + trusted teacher for context letters</li>
+      <li>Tutoring / office hours early in hard courses</li>
+      <li>Health / counseling resources when the dip is about more than “study harder”</li>
+      <li>One adult who knows the real timeline (parent, mentor, coach)</li>
+    </ul>
+  </section>
+
+  <section class="card checklist">
+    <h2>This-month checklist</h2>
+    <label><input type="checkbox"> Write a 5-sentence “what happened / what changed” draft (private)</label>
+    <label><input type="checkbox"> Build a college list with ≥3 likely options</label>
+    <label><input type="checkbox"> Book tutoring or office hours for the hardest class</label>
+    <label><input type="checkbox"> One clinical or service shift on the calendar</label>
+    <label><input type="checkbox"> If premed: open playbook + one MCAT stretch</label>
+  </section>
+
+  <p>
+    <a class="cta" href="index.html">Open Explorer →</a>
+    <a class="cta ghost" href="premed-playbook.html">Premed playbook</a>
+    <a class="cta ghost" href="parents.html">Parents</a>
+  </p>
+</div>
+<div id="site-footer-slot"></div>
+<script>
+document.querySelectorAll('.checklist input').forEach((el,i)=>{
+  const k='rough-year-check-'+i;
+  el.checked=localStorage.getItem(k)==='1';
+  el.addEventListener('change',()=>localStorage.setItem(k,el.checked?'1':'0'));
+});
+</script>
+<script src="footer.js"></script>
+</body>
+</html>
