@@ -52,6 +52,17 @@ th{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.
 .foot{color:var(--muted);font-size:.82rem;margin-top:28px}
 .checklist label{display:flex;gap:10px;align-items:flex-start;margin:8px 0;cursor:pointer}
 .checklist input{margin-top:4px;accent-color:var(--accent);width:18px;height:18px}
+
+.cta{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:44px;padding:10px 16px;border-radius:12px;background:var(--accent);color:#042f2e!important;
+  font-weight:750;text-decoration:none;margin:10px 8px 0 0;
+}
+.cta.ghost{background:transparent;color:var(--accent)!important;border:1px solid var(--line)}
+.site-footer{text-align:center;color:var(--muted);font-size:.82rem;padding:24px 16px 36px;line-height:1.55;max-width:820px;margin:0 auto}
+.site-footer nav{display:flex;flex-wrap:wrap;gap:8px 14px;justify-content:center;margin-bottom:12px}
+.site-footer nav a{color:var(--accent);font-weight:650;text-decoration:none}
+.site-footer nav a:hover{text-decoration:underline}
 </style>
 </head>
 <body>
@@ -128,6 +139,7 @@ th{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.
           <li>Public health + policy</li>
         </ul>
         <p>You don’t have to pick “pure prestige doctor” or “sell out.” Lots of people combine care + building better systems.</p>
+        <p><a class="cta ghost" href="med-business-playbook.html">Med + Business playbook →</a></p>
         <h3>About money (without making it the whole plot)</h3>
         <p>Survey data (e.g. Doximity physician compensation reports) shows surgical/procedural specialties often earn more than primary care on average. That’s info — not a personality test. Pick work you can do for decades.</p>
       </div>
@@ -177,6 +189,11 @@ th{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.
       <li><strong>Timeline</strong> — 3–6 months part-time is common; longer if you’re in heavy STEM terms.</li>
     </ol>
     <p><span class="tag">Pro move</span> Set a <em>floor target</em> (ex: 510) and a <em>stretch target</em> (ex: 515). Retake only with a real plan — not vibes.</p>
+    <p style="margin-top:14px">
+      <a class="cta" href="mcat-prep.html">Practice MCAT stretches →</a>
+      <a class="cta ghost" href="mcat-prep.html">Open MCAT prep app</a>
+    </p>
+    <p style="color:var(--muted);font-size:.88rem;margin-top:8px">Original practice items for learning — not AAMC exam content. Topics guided by public content-outline emphases.</p>
   </section>
 
   <section class="card">
@@ -228,6 +245,8 @@ th{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.
     If you remix this, keep the sources and the “humans over hustle” energy.
   </p>
 </div>
+<div id="site-footer-slot"></div>
+<script src="footer.js"></script>
 <script>
   // Persist checklist locally in-browser only (no server). Optional quality-of-life.
   document.querySelectorAll('.checklist input').forEach((el, i) => {
